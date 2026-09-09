@@ -60,7 +60,10 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
       } @else {
         <div class="quotes-grid">
           @for (quote of quotes(); track quote.id) {
-            <wa-card class="quote-item" [class.used]="quote.used_at" [class.next-up]="quote.next_up">
+            <wa-card orientation="horizontal" class="quote-item horizontal-card" [class.used]="quote.used_at" [class.next-up]="quote.next_up">
+            <img slot="media" src="/images/thumbs/default.jpg"
+              alt="movie thumb"
+            />
               <p class="quote-text">{{ quote.quote_text }}</p>
               <div class="quote-source">
                 <span class="source">{{ quote.source_name }}</span>
@@ -107,25 +110,8 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
       }
     </div>
   `,
-  styles: [`
-    .quote-list-container { padding: 20px 0; }
-    .filters { margin-bottom: 16px; }
-    .filter-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; &:not(:last-child) { margin-bottom: 12px; } wa-input, wa-select { flex: 1; min-width: 150px; } }
-    .sort-controls { display: flex; align-items: center; gap: 8px; margin-left: auto; span { color: var(--color-text-light); font-size: 0.9rem; } wa-select { min-width: 140px; } }
-    .quote-count { color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .loading { text-align: center; padding: 40px; color: var(--color-text-light); display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .quotes-grid { display: grid; gap: 16px; }
-    .quote-item { position: relative; &.used { opacity: 0.7; border-left: 3px solid var(--wa-color-success-600); } &.next-up { border-left: 3px solid var(--wa-color-warning-600); } }
-    .quote-text { font-size: 1.1rem; margin-bottom: 12px; font-style: italic; &::before { content: '"'; } &::after { content: '"'; } }
-    .quote-source { margin-bottom: 8px; .source { font-weight: 500; color: var(--color-brown); } .speaker { color: var(--color-text-light); } }
-    .tags { margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .quote-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; .contributor { font-size: 0.85rem; color: var(--color-text-light); } }
-    .quote-actions { display: flex; gap: 4px; border-top: 1px solid var(--wa-color-neutral-200); padding-top: 12px; margin-top: 8px; }
-    .delete-btn:hover { --wa-color-neutral-600: var(--wa-color-danger-600); }
-    .toast-notification { position: fixed; bottom: 20px; right: 20px; z-index: 1000; animation: slideIn 0.3s ease; }
-    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    wa-card { display: block; }
-  `]
+  styleUrl: './quote-list.component.scss'
+
 })
 export class QuoteListComponent implements OnInit {
   private quoteService = inject(QuoteService);

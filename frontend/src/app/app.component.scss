@@ -49,3 +49,11 @@ footer {
     color:var(--color-cream);
   }
 }
+@media screen and (max-width: 768px) {
+
+  main {
+    max-width: 95%;
+  }
+
+
+}
