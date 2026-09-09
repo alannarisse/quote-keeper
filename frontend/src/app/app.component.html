@@ -9,16 +9,17 @@
 
         <wa-button-group>
           <wa-button [variant]="isActive('/') ? 'brand' : 'neutral'" routerLink="/" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">
+            [routerLinkActiveOptions]="{exact: true}" size="s">
             <wa-icon slot="prefix" name="shuffle"></wa-icon>
             Random
           </wa-button>
           <wa-button [variant]="isActive('/quotes') ? 'brand' : 'neutral'" routerLink="/quotes"
-            routerLinkActive="active">
+            routerLinkActive="active" size="s">
             <wa-icon slot="prefix" name="list"></wa-icon>
             All Quotes
           </wa-button>
-          <wa-button [variant]="isActive('/add') ? 'brand' : 'neutral'" routerLink="/add" routerLinkActive="active">
+          <wa-button [variant]="isActive('/add') ? 'brand' : 'neutral'" routerLink="/add" routerLinkActive="active"
+            size="s">
             <wa-icon slot="prefix" name="plus"></wa-icon>
             Add Quote
           </wa-button>
@@ -30,19 +31,7 @@
     <router-outlet />
   </main>
   <footer>
-    <h2>Other Stuff I've made recently-ish</h2>
-    <ul>
-      <li><a href="https://sendaboop.app" target="_blank">Send A Boop</a></li>
-      <li><a href="https://alannarisse.github.io/magic-eight-ball" target="_blank">Magic Gen-X Eightball</a></li>
-      <li><a href="https://www.diy-qr.com/" target="_blank">DIY QR Code Generator</a></li>
-      <li><a href="https://alannarisse.github.io/quizzes/wine-and-food-pairing/" target="_blank">Wine and Food Pairing
-          App</a></li>
-      <li><a href="https://alannarisse.github.io/quizzes/dmv-practice/" target="_blank">Oregon Learner's Permit Quiz</a>
-      </li>
-      <li><a href="https://silly-raindrop-967589.netlify.app/" target="_blank">Scrumptious! Recipe Finder</a></li>
-      <li><a href="https://alannarisse.github.io/js-games" target="_blank">Javascript Games</a></li>
-      <li><a href="https://alannarisse.github.io/quizzes/shelf-game/" target="_blank">Food Shelf Game</a></li>
-      <li><a href="https://alannarisse.github.io/pomodoro-timer/" target="_blank">Pomodoro Timer</a></li>
-    </ul>
+    <h2>Brought to you by the letters Q, and K, and the numbers, 66, 42, and 0.</h2>
+
   </footer>
 </div>

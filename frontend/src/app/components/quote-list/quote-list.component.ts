@@ -94,13 +94,13 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
                   <wa-button variant="neutral" size="xs" title="Edit quote" aria-label="Edit quote" (click)="editQuote(quote)">
                     <wa-icon name="pencil"></wa-icon>
                   </wa-button>
-                  <wa-button [variant]="quote.next_up ? 'brand' : 'neutral'" size="xs" [title]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" [aria-label]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" (click)="toggleNextUp(quote)">
+                  <wa-button [variant]="quote.next_up ? 'brand' : 'neutral'" size="xs" [title]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" [aria-label]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" (click)="toggleNextUp(quote)" size="s">
                     <wa-icon name="star"></wa-icon>
                   </wa-button>
-                  <wa-button [variant]="quote.used_at ? 'success' : 'neutral'" size="xs" [title]="quote.used_at ? 'Mark as unused' : 'Mark as used'" [aria-label]="quote.used_at ? 'Mark as unused' : 'Mark as used'" (click)="toggleUsed(quote)">
+                  <wa-button [variant]="quote.used_at ? 'success' : 'neutral'" size="xs" [title]="quote.used_at ? 'Mark as unused' : 'Mark as used'" [aria-label]="quote.used_at ? 'Mark as unused' : 'Mark as used'" (click)="toggleUsed(quote)" size="s">
                     <wa-icon [name]="quote.used_at ? 'rotate-left' : 'check'"></wa-icon>
                   </wa-button>
-                  <wa-button variant="neutral" size="xs" class="delete-btn" title="Delete quote" aria-label="Delete quote" (click)="deleteQuote(quote)">
+                  <wa-button variant="neutral" size="xs" class="delete-btn" title="Delete quote" aria-label="Delete quote" (click)="deleteQuote(quote)" size="s">
                     <wa-icon name="trash"></wa-icon>
                   </wa-button>
                 </div>

@@ -86,29 +86,7 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
       }
     </div>
   `,
-  styles: [`
-    .random-quote-container { padding: 20px 0; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
-    .quote-card { text-align: center; padding: 40px 32px; }
-    .thumb-container { margin-bottom: 20px; display: flex; justify-content: center; }
-    .random-quote-thumb {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: var(--radius-md, 10px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--wa-color-neutral-200);
-    }
-    .quote-text { font-size: 1.4rem; max-width: 700px; margin: 0 auto 20px; font-style: italic; &::before { content: '"'; } &::after { content: '"'; } }
-    .quote-source { margin-bottom: 16px; .source { font-weight: 500; color: var(--color-brown); } .speaker { color: var(--color-text-light); margin-left: 6px; } }
-    .tags { margin-bottom: 24px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--wa-color-neutral-200); margin-top: 16px; }
-    .loading-card, .empty-card, .error-card { text-align: center; padding: 40px; color: var(--color-text-light); display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    .error-card { color: var(--color-error); }
-    .toast-notification { position: fixed; bottom: 20px; right: 20px; z-index: 1000; animation: slideIn 0.3s ease; }
-    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    wa-card { display: block; }
-  `]
+  styleUrls: ['./random-quote.component.scss']
 })
 export class RandomQuoteComponent implements OnInit {
   private quoteService = inject(QuoteService);
