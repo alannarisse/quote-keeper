@@ -1,5 +1,9 @@
 .app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
 }
 
 header {
@@ -29,7 +33,7 @@ footer {
   color: var(--color-cream);
   background: var(--color-dark-brown);
   padding: 3rem;
-  max-width: 100%;
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;

@@ -57,7 +57,7 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
               } @else {
                 <div class="upload-placeholder">
                   <wa-icon name="image" class="upload-icon"></wa-icon>
-                  <span>Click to choose an image (JPG, PNG, GIF, WEBP max 5MB)</span>
+                  <span>Click to choose an image (JPG, PNG, GIF, WEBP max 2MB)</span>
                   <span class="default-hint">If no image is uploaded, the default thumbnail will be used.</span>
                 </div>
               }
@@ -207,8 +207,8 @@ export class AddQuoteComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      if (file.size > 5 * 1024 * 1024) {
-        this.error.set('Image must be smaller than 5MB');
+      if (file.size > 2 * 1024 * 1024) {
+        this.error.set('Image must be smaller than 2MB');
         return;
       }
       this.selectedFile = file;
