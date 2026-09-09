@@ -2,6 +2,10 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 
+// Set local Font Awesome icons path for Web Awesome
+import { setIconPath } from '@awesome.me/webawesome/dist/utilities/base-path.js';
+setIconPath('/assets/fontawesome/svgs');
+
 // Explicitly import Web Awesome components to register custom elements
 import '@awesome.me/webawesome/dist/components/button/button.js';
 import '@awesome.me/webawesome/dist/components/button-group/button-group.js';

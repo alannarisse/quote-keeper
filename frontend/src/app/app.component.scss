@@ -4,7 +4,7 @@
 
 header {
   box-shadow: var(--shadow-sm);
-  padding: 1rem;
+  padding: 1rem .6rem;
   margin-bottom: 20px;
 
   .container {
@@ -21,39 +21,45 @@ header {
 main {
   padding-bottom: 40px;
   max-width: 65%;
-  min-height:70vh;
+  min-height: 70vh;
   margin: auto;
 }
+
 footer {
-  color:var(--color-cream);
+  color: var(--color-cream);
   background: var(--color-dark-brown);
   padding: 3rem;
   max-width: 100%;
   margin: auto;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   h2 {
-    font-size:1.2rem;
-    margin-bottom:1rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
   }
+
   ul {
-    font-size:.8rem;
-    list-style-type:none;
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    font-size: .8rem;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 1.6rem;
   }
+
   a {
-    color:var(--color-cream);
+    color: var(--color-cream);
   }
 }
-@media screen and (max-width: 768px) {
 
+@media screen and (max-width: 768px) {
   main {
     max-width: 95%;
   }
 
-
+  .container {
+    padding: 0;
+  }
 }

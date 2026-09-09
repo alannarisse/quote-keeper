@@ -25,8 +25,13 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/assets", {"glob": "**/*", "input": "public"}],
+            "assets": [
+              "src/assets",
+              { "glob": "**/*", "input": "public" },
+              { "glob": "**/*", "input": "node_modules/@fortawesome/fontawesome-free/svgs", "output": "assets/fontawesome/svgs" }
+            ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss",
               "node_modules/@awesome.me/webawesome/dist/styles/webawesome.css"
             ],

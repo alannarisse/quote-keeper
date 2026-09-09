@@ -20,10 +20,11 @@ wa-button {
     font-weight: 500;
     transition: all 0.2s ease;
   }
-  &:focus-within::part(base){
-     border-color: rgba(117, 176, 88, 0.4); // #49A4DA (matches --wa-input-border-color-focus)
+
+  &:focus-within::part(base) {
+    border-color: rgba(117, 176, 88, 0.4); // #49A4DA (matches --wa-input-border-color-focus)
     box-shadow: 0 0 0 3px rgba(121, 157, 103, 0.4);
-  outline: none;
+    outline: none;
   }
 }
 
@@ -88,15 +89,18 @@ wa-dialog {
 }
 
 // Tag styling
-wa-tag, wa-badge {
+wa-tag,
+wa-badge {
   padding: 0.6rem;
   font-weight: 600;
   background: var(--color-light-bg);
+
   &::part(base) {
     border-radius: 20px;
     font-size: 0.8rem;
   }
 }
-wa-badge{
+
+wa-badge {
   background: var(--color-success);
 }

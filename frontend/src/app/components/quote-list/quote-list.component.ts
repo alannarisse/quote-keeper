@@ -39,11 +39,9 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
               <wa-option value="next_up">Next Up</wa-option>
               <wa-option value="random">Random</wa-option>
             </wa-select>
-            <wa-tooltip [content]="filters.sort === 'random' ? 'Reshuffle' : (filters.order === 'asc' ? 'Sort Ascending' : 'Sort Descending')">
-              <wa-button variant="text" size="small" (click)="toggleOrder()">
-                <wa-icon [name]="filters.sort === 'random' ? 'shuffle' : (filters.order === 'asc' ? 'arrow-up' : 'arrow-down')"></wa-icon>
-              </wa-button>
-            </wa-tooltip>
+            <wa-button variant="text" size="small" (click)="toggleOrder()" [title]="filters.sort === 'random' ? 'Reshuffle' : (filters.order === 'asc' ? 'Sort Ascending' : 'Sort Descending')">
+              <wa-icon [name]="filters.sort === 'random' ? 'shuffle' : (filters.order === 'asc' ? 'arrow-up' : 'arrow-down')"></wa-icon>
+            </wa-button>
           </div>
         </div>
       </wa-card>
@@ -69,12 +67,14 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
                   (error)="onImageError($event)"
                   class="quote-thumb-img"
                 />
-                <div class="quote-body">
-                  <p class="quote-text">{{ quote.quote_text }}</p>
-                  <div class="quote-source">
+                <div class="quote-source">
                     <span class="source">{{ quote.source_name }}</span>
                     @if (quote.speaker_1) { <span class="speaker">— {{ quote.speaker_1 }}</span> }
                   </div>
+              </div>
+              <div class="quote-body">
+                  <p class="quote-text">{{ quote.quote_text }}</p>
+                  
                   @if (quote.tags.length > 0) {
                     <div class="tags">@for (tag of quote.tags; track tag) { <wa-tag size="small">{{ tag }}</wa-tag> }</div>
                   }
@@ -83,35 +83,25 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
                     @if (quote.used_at) { <wa-badge variant="success">Used</wa-badge> }
                     @if (quote.contributor) { <span class="contributor">by {{ quote.contributor }}</span> }
                   </div>
-                  <div class="quote-actions">
-                    <wa-tooltip content="Copy">
-                      <wa-button variant="neutral" size="small" (click)="copyQuote(quote)">
-                        <wa-icon name="clipboard"></wa-icon>
-                      </wa-button>
-                    </wa-tooltip>
-                    <wa-tooltip content="Edit">
-                      <wa-button variant="neutral" size="small" (click)="editQuote(quote)">
-                        <wa-icon name="pencil"></wa-icon>
-                      </wa-button>
-                    </wa-tooltip>
-                    <wa-tooltip [content]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'">
-                      <wa-button [variant]="quote.next_up ? 'brand' : 'neutral'" size="small" (click)="toggleNextUp(quote)">
-                        <wa-icon name="star"></wa-icon>
-                      </wa-button>
-                    </wa-tooltip>
-                    <wa-tooltip [content]="quote.used_at ? 'Mark as unused' : 'Mark as used'">
-                      <wa-button [variant]="quote.used_at ? 'success' : 'neutral'" size="small" (click)="toggleUsed(quote)">
-                        <wa-icon [name]="quote.used_at ? 'rotate-left' : 'check'"></wa-icon>
-                      </wa-button>
-                    </wa-tooltip>
-                    <wa-tooltip content="Delete">
-                      <wa-button variant="neutral" size="small" class="delete-btn" (click)="deleteQuote(quote)">
-                        <wa-icon name="trash"></wa-icon>
-                      </wa-button>
-                    </wa-tooltip>
-                  </div>
+                  
                 </div>
-              </div>
+                <div class="quote-actions">
+                  <wa-button variant="neutral" size="small" title="Copy quote" aria-label="Copy quote" (click)="copyQuote(quote)">
+                    <wa-icon name="clipboard"></wa-icon>
+                  </wa-button>
+                  <wa-button variant="neutral" size="small" title="Edit quote" aria-label="Edit quote" (click)="editQuote(quote)">
+                    <wa-icon name="pencil"></wa-icon>
+                  </wa-button>
+                  <wa-button [variant]="quote.next_up ? 'brand' : 'neutral'" size="small" [title]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" [aria-label]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" (click)="toggleNextUp(quote)">
+                    <wa-icon name="star"></wa-icon>
+                  </wa-button>
+                  <wa-button [variant]="quote.used_at ? 'success' : 'neutral'" size="small" [title]="quote.used_at ? 'Mark as unused' : 'Mark as used'" [aria-label]="quote.used_at ? 'Mark as unused' : 'Mark as used'" (click)="toggleUsed(quote)">
+                    <wa-icon [name]="quote.used_at ? 'rotate-left' : 'check'"></wa-icon>
+                  </wa-button>
+                  <wa-button variant="neutral" size="small" class="delete-btn" title="Delete quote" aria-label="Delete quote" (click)="deleteQuote(quote)">
+                    <wa-icon name="trash"></wa-icon>
+                  </wa-button>
+                </div>
             </wa-card>
           }
         </div>
