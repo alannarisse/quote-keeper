@@ -12,6 +12,8 @@ wa-card {
     border-color: var(--wa-color-surface-border);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
+
+  --spacing: var(--wa-space-m);
 }
 
 // Button customizations

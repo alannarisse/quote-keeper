@@ -67,10 +67,6 @@
 .quote-item {
   position: relative;
 
-  &:last-child {
-    padding: 100px;
-  }
-
   &.used {
     opacity: 0.7;
     border-left: 3px solid var(--wa-color-success-600);
@@ -112,6 +108,7 @@
 
       &:hover {
         background-color: var(--color-brown);
+        transform: translateY(-2px);
       }
     }
   }
@@ -145,6 +142,7 @@
 
 .quote-source {
   margin-bottom: 6px;
+  line-height: 1.3rem;
 
   .source {
     font-weight: 500;
@@ -153,6 +151,7 @@
 
   .speaker {
     color: var(--color-text-light);
+    font-size: .8rem;
   }
 }
 
