@@ -1,0 +1,144 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.edit-modal {
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--wa-color-neutral-200);
+
+    h2 {
+        margin: 0;
+    }
+}
+
+wa-input,
+wa-textarea {
+    display: block;
+    margin-bottom: 16px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+
+    wa-input {
+        margin-bottom: 0;
+    }
+}
+
+wa-callout {
+    margin-bottom: 16px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding-top: 16px;
+    border-top: 1px solid var(--wa-color-neutral-200);
+}
+
+.image-upload-section {
+    margin-bottom: 16px;
+
+    .section-label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+    }
+}
+
+.file-dropzone {
+    border: 2px dashed var(--wa-color-neutral-300);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+
+    &:hover {
+        border-color: var(--wa-color-brand-600);
+    }
+
+    &.has-file {
+        cursor: default;
+        border-style: solid;
+    }
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--wa-color-neutral-600);
+    font-size: 0.9rem;
+
+    .upload-icon {
+        font-size: 1.8rem;
+    }
+}
+
+.preview-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+}
+
+.preview-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--wa-color-neutral-200);
+    flex-shrink: 0;
+}
+
+.preview-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+
+    .file-name {
+        font-weight: 500;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .file-size {
+        font-size: 0.8rem;
+        color: var(--wa-color-neutral-600);
+    }
+
+    .remove-btn {
+        align-self: flex-start;
+        margin-top: 4px;
+    }
+}

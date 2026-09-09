@@ -10,6 +10,7 @@
     "db:test": "node src/db/test.js",
     "db:seed": "node src/db/seed.js",
     "db:export": "node src/db/export.js",
+    "db:backup": "node src/db/backup.js",
     "db:reseed": "node src/db/reseed.js",
     "db:reseed:force": "node src/db/reseed.js --force"
   },

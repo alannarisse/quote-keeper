@@ -60,12 +60,49 @@ const requirePassword = (req, res, next) => {
   next();
 };
 
+// GET /api/quotes/backup/download - Download full JSON backup of active quotes
+router.get('/backup/download', async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT source_name, quote_text, speaker_1, speaker_2, speaker_3,
+             notes, contributor, tags, image_url, next_up, used_at IS NOT NULL as used
+      FROM quotes
+      WHERE deleted_at IS NULL
+      ORDER BY source_name, id
+    `);
+
+    const quotes = result.rows.map(row => ({
+      source: row.source_name,
+      quote: row.quote_text,
+      speaker_1: row.speaker_1 || null,
+      speaker_2: row.speaker_2 || null,
+      speaker_3: row.speaker_3 || null,
+      contributor: row.contributor || null,
+      tags: row.tags || [],
+      notes: row.notes || null,
+      image_url: row.image_url || null,
+      next_up: Boolean(row.next_up),
+      used: Boolean(row.used)
+    }));
+
+    const dateStr = new Date().toISOString().slice(0, 10);
+    res.setHeader('Content-Disposition', `attachment; filename="quotes-backup-${dateStr}.json"`);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(quotes, null, 2));
+  } catch (err) {
+    console.error('Error generating backup download:', err);
+    res.status(500).json({ error: 'Failed to generate backup' });
+  }
+});
+
 // GET /api/quotes - List all quotes with optional filtering/sorting
 router.get('/', async (req, res) => {
   try {
-    const { sort, order = 'asc', source, speaker, tag, unused } = req.query;
+    const { sort, order = 'asc', source, speaker, tag, unused, deleted } = req.query;
 
-    let query = 'SELECT * FROM quotes WHERE 1=1';
+    let query = deleted === 'true'
+      ? 'SELECT * FROM quotes WHERE deleted_at IS NOT NULL'
+      : 'SELECT * FROM quotes WHERE deleted_at IS NULL';
     const params = [];
 
     if (source) {
@@ -114,7 +151,7 @@ router.get('/', async (req, res) => {
 router.get('/random', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT * FROM quotes WHERE used_at IS NULL ORDER BY RANDOM() LIMIT 1'
+      'SELECT * FROM quotes WHERE used_at IS NULL AND deleted_at IS NULL ORDER BY RANDOM() LIMIT 1'
     );
 
     if (result.rows.length === 0) {
@@ -132,7 +169,7 @@ router.get('/random', async (req, res) => {
 router.get('/tags', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT DISTINCT unnest(tags) as tag FROM quotes ORDER BY tag'
+      'SELECT DISTINCT unnest(tags) as tag FROM quotes WHERE deleted_at IS NULL ORDER BY tag'
     );
     res.json(result.rows.map(r => r.tag));
   } catch (err) {
@@ -145,7 +182,7 @@ router.get('/tags', async (req, res) => {
 router.get('/sources', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT DISTINCT source_name FROM quotes ORDER BY source_name'
+      'SELECT DISTINCT source_name FROM quotes WHERE deleted_at IS NULL ORDER BY source_name'
     );
     res.json(result.rows.map(r => r.source_name));
   } catch (err) {
@@ -157,7 +194,7 @@ router.get('/sources', async (req, res) => {
 // GET /api/quotes/:id - Get single quote
 router.get('/:id', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM quotes WHERE id = $1', [req.params.id]);
+    const result = await pool.query('SELECT * FROM quotes WHERE id = $1 AND deleted_at IS NULL', [req.params.id]);
 
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Quote not found' });
@@ -392,16 +429,38 @@ router.patch('/:id/unuse', requirePassword, async (req, res) => {
   }
 });
 
-// DELETE /api/quotes/:id - Delete quote (requires password)
-router.delete('/:id', requirePassword, async (req, res) => {
+// PATCH /api/quotes/:id/restore - Restore soft-deleted quote (requires password)
+router.patch('/:id/restore', requirePassword, async (req, res) => {
   try {
-    const result = await pool.query('DELETE FROM quotes WHERE id = $1 RETURNING *', [req.params.id]);
+    const result = await pool.query(
+      'UPDATE quotes SET deleted_at = NULL, updated_at = CURRENT_TIMESTAMP WHERE id = $1 AND deleted_at IS NOT NULL RETURNING *',
+      [req.params.id]
+    );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Quote not found' });
+      return res.status(404).json({ error: 'Deleted quote not found' });
     }
 
-    res.json({ message: 'Quote deleted', quote: result.rows[0] });
+    res.json({ message: 'Quote restored', quote: result.rows[0] });
+  } catch (err) {
+    console.error('Error restoring quote:', err);
+    res.status(500).json({ error: 'Failed to restore quote' });
+  }
+});
+
+// DELETE /api/quotes/:id - Soft-delete quote (requires password)
+router.delete('/:id', requirePassword, async (req, res) => {
+  try {
+    const result = await pool.query(
+      'UPDATE quotes SET deleted_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = $1 AND deleted_at IS NULL RETURNING *',
+      [req.params.id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Quote not found or already deleted' });
+    }
+
+    res.json({ message: 'Quote deleted (soft delete)', quote: result.rows[0] });
   } catch (err) {
     console.error('Error deleting quote:', err);
     res.status(500).json({ error: 'Failed to delete quote' });

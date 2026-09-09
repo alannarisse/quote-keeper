@@ -105,4 +105,13 @@ export class QuoteService {
     const headers = new HttpHeaders({ 'x-app-password': password });
     return this.http.patch<Quote>(`${this.baseUrl}/${id}`, quote, { headers });
   }
+
+  restoreQuote(id: number, password: string): Observable<Quote> {
+    const headers = new HttpHeaders({ 'x-app-password': password });
+    return this.http.patch<Quote>(`${this.baseUrl}/${id}/restore`, {}, { headers });
+  }
+
+  getBackupDownloadUrl(): string {
+    return `${this.baseUrl}/backup/download`;
+  }
 }

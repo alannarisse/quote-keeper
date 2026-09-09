@@ -1,5 +1,7 @@
 .quote-list-container {
   padding: 20px 0;
+  max-width: 85%;
+  margin: auto;
 }
 
 .filters {
@@ -213,5 +215,9 @@ wa-card {
 @media screen and (max-width: 768px) {
   .quotes-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quote-list-container {
+    max-width: 100%;
   }
 }

@@ -94,16 +94,28 @@ PORT=3000
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
-| GET | /api/quotes | No | List all quotes |
+| GET | /api/quotes | No | List all active quotes (use `?deleted=true` for trash) |
 | GET | /api/quotes/random | No | Get random unused quote |
 | GET | /api/quotes/tags | No | List all tags |
 | GET | /api/quotes/sources | No | List all sources |
+| GET | /api/quotes/backup/download | No | Download full JSON backup file |
 | POST | /api/quotes | Yes | Add new quote |
+| POST | /api/quotes/bulk | Yes | Bulk import array of quotes from JSON |
+| PATCH | /api/quotes/:id | Yes | Update quote |
 | PATCH | /api/quotes/:id/used | Yes | Mark as used |
 | PATCH | /api/quotes/:id/unuse | Yes | Mark as unused |
-| DELETE | /api/quotes/:id | Yes | Delete quote |
+| PATCH | /api/quotes/:id/nextup | Yes | Toggle next up |
+| PATCH | /api/quotes/:id/restore | Yes | Restore soft-deleted quote |
+| DELETE | /api/quotes/:id | Yes | Soft-delete quote |
 
 Auth requires `x-app-password` header.
+
+## Database Backups & Safety
+
+- **Soft Deletes**: Quotes deleted via the UI/API are flagged with `deleted_at` rather than destroyed. They can be restored with `PATCH /api/quotes/:id/restore`.
+- **Manual Backups**: Run `npm run db:backup` inside `backend/` to create a timestamped backup in `backend/backups/`.
+- **One-Click Backup Download**: Visit `/api/quotes/backup/download` to download the current JSON backup directly.
+- **Automated GitHub Actions Backup**: A GitHub Actions workflow runs daily (`.github/workflows/db-backup.yml`) to automatically snapshot the database into `backend/backups/`. Add `DATABASE_URL` to your GitHub Repository Secrets to enable it.
 
 ## Deployment
 
@@ -124,22 +136,32 @@ Auth requires `x-app-password` header.
 
 ```
 quote-keeper/
+├── .github/
+│   └── workflows/
+│       └── db-backup.yml    # Daily automated backup workflow
 ├── backend/
+│   ├── backups/             # Timestamped JSON backups
+│   ├── data/
+│   │   └── quotes.json      # Complete seed & export JSON file
 │   ├── src/
 │   │   ├── db/
-│   │   │   ├── init.js      # DB schema
-│   │   │   ├── pool.js      # Connection pool
-│   │   │   └── seed.js      # Seed data
+│   │   │   ├── init.js      # DB schema & migrations
+│   │   │   ├── pool.js      # PostgreSQL connection pool
+│   │   │   ├── export.js    # DB export script
+│   │   │   ├── backup.js    # Timestamped backup script
+│   │   │   ├── seed.js      # Initial seed
+│   │   │   └── reseed.js    # Reseed database from quotes.json
 │   │   ├── routes/
-│   │   │   └── quotes.js    # API routes
-│   │   └── index.js         # Express server
+│   │   │   └── quotes.js    # API routes (quotes, upload, bulk, backup)
+│   │   └── index.js         # Express server entry point
+│   ├── uploads/             # Image uploads directory
 │   ├── .env.example
 │   └── package.json
 ├── frontend/
 │   ├── src/
 │   │   ├── app/
 │   │   │   ├── components/  # UI components
-│   │   │   ├── services/    # API services
+│   │   │   ├── services/    # API & auth services
 │   │   │   └── ...
 │   │   └── environments/
 │   └── package.json

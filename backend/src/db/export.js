@@ -13,6 +13,7 @@ const exportQuotes = async () => {
       SELECT source_name, quote_text, speaker_1, speaker_2, speaker_3,
              notes, contributor, tags, image_url, next_up, used_at IS NOT NULL as used
       FROM quotes
+      WHERE deleted_at IS NULL
       ORDER BY source_name, id
     `);
 
