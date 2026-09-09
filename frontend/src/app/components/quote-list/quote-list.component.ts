@@ -91,18 +91,20 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
                   <wa-button variant="neutral" size="xs" title="Copy quote" aria-label="Copy quote" (click)="copyQuote(quote)">
                     <wa-icon name="clipboard"></wa-icon>
                   </wa-button>
-                  <wa-button variant="neutral" size="xs" title="Edit quote" aria-label="Edit quote" (click)="editQuote(quote)">
-                    <wa-icon name="pencil"></wa-icon>
-                  </wa-button>
-                  <wa-button [variant]="quote.next_up ? 'brand' : 'neutral'" size="xs" [title]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" [aria-label]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" (click)="toggleNextUp(quote)">
-                    <wa-icon name="star"></wa-icon>
-                  </wa-button>
-                  <wa-button [variant]="quote.used_at ? 'success' : 'neutral'" size="xs" [title]="quote.used_at ? 'Mark as unused' : 'Mark as used'" [aria-label]="quote.used_at ? 'Mark as unused' : 'Mark as used'" (click)="toggleUsed(quote)">
-                    <wa-icon [name]="quote.used_at ? 'rotate-left' : 'check'"></wa-icon>
-                  </wa-button>
-                  <wa-button variant="neutral" size="xs" class="delete-btn" title="Delete quote" aria-label="Delete quote" (click)="deleteQuote(quote)">
-                    <wa-icon name="trash"></wa-icon>
-                  </wa-button>
+                  @if (authService.isAuthenticated()) {
+                    <wa-button variant="neutral" size="xs" title="Edit quote" aria-label="Edit quote" (click)="editQuote(quote)">
+                      <wa-icon name="pencil"></wa-icon>
+                    </wa-button>
+                    <wa-button [variant]="quote.next_up ? 'brand' : 'neutral'" size="xs" [title]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" [aria-label]="quote.next_up ? 'Remove from Next Up' : 'Add to Next Up'" (click)="toggleNextUp(quote)">
+                      <wa-icon name="star"></wa-icon>
+                    </wa-button>
+                    <wa-button [variant]="quote.used_at ? 'success' : 'neutral'" size="xs" [title]="quote.used_at ? 'Mark as unused' : 'Mark as used'" [aria-label]="quote.used_at ? 'Mark as unused' : 'Mark as used'" (click)="toggleUsed(quote)">
+                      <wa-icon [name]="quote.used_at ? 'rotate-left' : 'check'"></wa-icon>
+                    </wa-button>
+                    <wa-button variant="neutral" size="xs" class="delete-btn" title="Delete quote" aria-label="Delete quote" (click)="deleteQuote(quote)">
+                      <wa-icon name="trash"></wa-icon>
+                    </wa-button>
+                  }
                 </div>
             </wa-card>
           }
@@ -123,7 +125,7 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
 })
 export class QuoteListComponent implements OnInit {
   private quoteService = inject(QuoteService);
-  private authService = inject(AuthService);
+  authService = inject(AuthService);
 
   quotes = signal<Quote[]>([]);
   tags = signal<string[]>([]);

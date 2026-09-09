@@ -50,18 +50,20 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
               <wa-icon slot="prefix" name="clipboard"></wa-icon>
               Copy
             </wa-button>
-            <wa-button variant="neutral" (click)="editQuote()">
-              <wa-icon slot="prefix" name="pen-to-square"></wa-icon>
-              Edit
-            </wa-button>
-            <wa-button [variant]="quote()!.next_up ? 'brand' : 'neutral'" (click)="toggleNextUp()">
-              <wa-icon slot="prefix" name="star"></wa-icon>
-              {{ quote()!.next_up ? 'Remove from Next Up' : 'Next Up' }}
-            </wa-button>
-            <wa-button variant="neutral" (click)="markAsUsed()">
-              <wa-icon slot="prefix" name="check"></wa-icon>
-              Mark as Used
-            </wa-button>
+            @if (authService.isAuthenticated()) {
+              <wa-button variant="neutral" (click)="editQuote()">
+                <wa-icon slot="prefix" name="pencil"></wa-icon>
+                Edit
+              </wa-button>
+              <wa-button [variant]="quote()!.next_up ? 'brand' : 'neutral'" (click)="toggleNextUp()">
+                <wa-icon slot="prefix" name="star"></wa-icon>
+                {{ quote()!.next_up ? 'Remove from Next Up' : 'Next Up' }}
+              </wa-button>
+              <wa-button variant="neutral" (click)="markAsUsed()">
+                <wa-icon slot="prefix" name="check"></wa-icon>
+                Mark as Used
+              </wa-button>
+            }
           </div>
         </wa-card>
       } @else if (error()) {
@@ -90,7 +92,7 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
 })
 export class RandomQuoteComponent implements OnInit {
   private quoteService = inject(QuoteService);
-  private authService = inject(AuthService);
+  authService = inject(AuthService);
 
   quote = signal<Quote | null>(null);
   loading = signal(false);

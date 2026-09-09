@@ -23,6 +23,17 @@
             <wa-icon slot="prefix" name="plus"></wa-icon>
             Add Quote
           </wa-button>
+          @if (authService.isAuthenticated()) {
+            <wa-button variant="neutral" size="s" (click)="logout()" title="Logout" aria-label="Logout">
+              <wa-icon slot="prefix" name="right-from-bracket"></wa-icon>
+              Logout
+            </wa-button>
+          } @else {
+            <wa-button variant="neutral" size="s" (click)="showLoginModal.set(true)" title="Login" aria-label="Login">
+              <wa-icon slot="prefix" name="lock"></wa-icon>
+              Login
+            </wa-button>
+          }
         </wa-button-group>
       </nav>
     </div>
@@ -32,6 +43,8 @@
   </main>
   <footer>
     <h2>Brought to you by the letters Q, and K, and the numbers, 66, 42, and 0.</h2>
-
   </footer>
+  @if (showLoginModal()) {
+    <app-password-modal (close)="showLoginModal.set(false)" (authenticated)="onAuthenticated($event)" />
+  }
 </div>
