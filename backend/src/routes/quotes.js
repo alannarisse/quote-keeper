@@ -227,6 +227,54 @@ router.post('/', requirePassword, handleUpload, async (req, res) => {
   }
 });
 
+// POST /api/quotes/bulk - Bulk import quotes from JSON array (requires password)
+router.post('/bulk', requirePassword, async (req, res) => {
+  try {
+    const rawQuotes = Array.isArray(req.body) ? req.body : req.body.quotes;
+    if (!Array.isArray(rawQuotes) || rawQuotes.length === 0) {
+      return res.status(400).json({ error: 'Request body must be a non-empty array of quotes or an object with a quotes array' });
+    }
+
+    const inserted = [];
+    for (const item of rawQuotes) {
+      const source_name = item.source_name || item.source;
+      const quote_text = item.quote_text || item.quote;
+      if (!source_name || !quote_text) continue;
+
+      const speaker_1 = item.speaker_1 || item.speaker || null;
+      const speaker_2 = item.speaker_2 || null;
+      const speaker_3 = item.speaker_3 || null;
+      const notes = item.notes || null;
+      const contributor = item.contributor || null;
+      let tags = item.tags || [];
+      if (typeof tags === 'string') {
+        try {
+          tags = JSON.parse(tags);
+        } catch {
+          tags = tags.split(',').map(t => t.trim()).filter(Boolean);
+        }
+      }
+      if (!Array.isArray(tags)) tags = [];
+      const image_url = item.image_url || item.image || null;
+      const next_up = Boolean(item.next_up);
+      const used_at = item.used ? new Date() : (item.used_at ? new Date(item.used_at) : null);
+
+      const result = await pool.query(
+        `INSERT INTO quotes (source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags, next_up, used_at, image_url)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+         RETURNING *`,
+        [source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags, next_up, used_at, image_url]
+      );
+      inserted.push(result.rows[0]);
+    }
+
+    res.status(201).json({ count: inserted.length, quotes: inserted });
+  } catch (err) {
+    console.error('Error bulk importing quotes:', err);
+    res.status(500).json({ error: 'Failed to bulk import quotes' });
+  }
+});
+
 // PATCH /api/quotes/:id - Update quote (requires password, supports multipart or json)
 router.patch('/:id', requirePassword, handleUpload, async (req, res) => {
   try {

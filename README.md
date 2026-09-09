@@ -1,6 +1,6 @@
 # Quote Keeper
 
-A web app to store and manage quotes from movies, TV shows, comedians, and other sources. Built for a weekly newsletter workflow.
+A web app to store and manage quotes from movies, TV shows, comedians, and other sources. Built for a weekly release messages.
 
 ## Features
 
@@ -11,6 +11,27 @@ A web app to store and manage quotes from movies, TV shows, comedians, and other
 - **Mark as Used** - Track which quotes have been used
 - **Tags & Filtering** - Organize quotes by source, speaker, or tags
 - **Password Protection** - Add/delete/mark actions require password
+
+## JSON template for bulk uploads
+Use this to create a big json file of quotes and send it to me (Alanna). image_url is not done yet so leave it null.
+
+```
+[
+  {
+    "source": "Airplane",
+    "quote": "Surely you can't be serious.",
+    "speaker_1": null,
+    "speaker_2": null,
+    "speaker_3": null,
+    "contributor": null,
+    "tags": [],
+    "notes": null,
+    "image_url": null,
+    "next_up": false,
+    "used": false
+  }
+]
+  ```
 
 ## Tech Stack
 
@@ -125,3 +146,4 @@ quote-keeper/
 ├── CLAUDE.md
 └── README.md
 ```
+

@@ -45,16 +45,16 @@ const reseed = async () => {
         `INSERT INTO quotes (source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags, next_up, used_at, image_url)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
         [
-          item.source,
-          item.quote,
-          item.speaker || null,
+          item.source || item.source_name,
+          item.quote || item.quote_text,
+          item.speaker_1 || item.speaker || null,
           item.speaker_2 || null,
           item.speaker_3 || null,
           item.notes || null,
-          item.contributor || 'Initial Seed',
-          item.tags || [],
-          item.next_up || false,
-          item.used ? new Date() : null,
+          item.contributor || null,
+          Array.isArray(item.tags) ? item.tags : [],
+          Boolean(item.next_up),
+          item.used ? new Date() : (item.used_at ? new Date(item.used_at) : null),
           item.image_url || item.image || null
         ]
       );

@@ -16,22 +16,19 @@ const exportQuotes = async () => {
       ORDER BY source_name, id
     `);
 
-    const quotes = result.rows.map(row => {
-      const quote = {
-        source: row.source_name,
-        quote: row.quote_text
-      };
-      if (row.speaker_1) quote.speaker = row.speaker_1;
-      if (row.speaker_2) quote.speaker_2 = row.speaker_2;
-      if (row.speaker_3) quote.speaker_3 = row.speaker_3;
-      if (row.notes) quote.notes = row.notes;
-      if (row.contributor && row.contributor !== 'Initial Seed') quote.contributor = row.contributor;
-      if (row.tags && row.tags.length > 0) quote.tags = row.tags;
-      if (row.image_url) quote.image_url = row.image_url;
-      if (row.next_up) quote.next_up = true;
-      if (row.used) quote.used = true;
-      return quote;
-    });
+    const quotes = result.rows.map(row => ({
+      source: row.source_name,
+      quote: row.quote_text,
+      speaker_1: row.speaker_1 || null,
+      speaker_2: row.speaker_2 || null,
+      speaker_3: row.speaker_3 || null,
+      contributor: row.contributor || null,
+      tags: row.tags || [],
+      notes: row.notes || null,
+      image_url: row.image_url || null,
+      next_up: Boolean(row.next_up),
+      used: Boolean(row.used)
+    }));
 
     const dataDir = path.join(__dirname, '../../data');
     if (!fs.existsSync(dataDir)) {
