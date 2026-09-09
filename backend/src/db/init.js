@@ -24,9 +24,11 @@ const initDb = async () => {
       );
 
       ALTER TABLE quotes ADD COLUMN IF NOT EXISTS image_url TEXT;
+      ALTER TABLE quotes ADD COLUMN IF NOT EXISTS deleted_at TIMESTAMP;
 
       CREATE INDEX IF NOT EXISTS idx_quotes_source ON quotes(source_name);
       CREATE INDEX IF NOT EXISTS idx_quotes_used ON quotes(used_at);
+      CREATE INDEX IF NOT EXISTS idx_quotes_deleted ON quotes(deleted_at);
       CREATE INDEX IF NOT EXISTS idx_quotes_tags ON quotes USING GIN(tags);
     `);
 
