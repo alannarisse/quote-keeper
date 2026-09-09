@@ -16,11 +16,14 @@ const initDb = async () => {
         notes TEXT,
         contributor VARCHAR(255),
         tags TEXT[] DEFAULT '{}',
+        image_url TEXT,
         next_up BOOLEAN DEFAULT FALSE,
         used_at TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
+
+      ALTER TABLE quotes ADD COLUMN IF NOT EXISTS image_url TEXT;
 
       CREATE INDEX IF NOT EXISTS idx_quotes_source ON quotes(source_name);
       CREATE INDEX IF NOT EXISTS idx_quotes_used ON quotes(used_at);

@@ -1,19 +1,25 @@
-import { Component, EventEmitter, Output, inject, signal, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, inject, signal, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { QuoteService } from '../../services/quote.service';
+import { QuoteService, Quote } from '../../services/quote.service';
 import { AuthService } from '../../services/auth.service';
 import { PasswordModalComponent } from '../password-modal/password-modal.component';
 
 @Component({
-  selector: 'app-add-quote',
+  selector: 'app-edit-quote-modal',
   standalone: true,
   imports: [CommonModule, FormsModule, PasswordModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <div class="add-quote-container">
-      <h2>Add a Quote</h2>
-      <wa-card>
+    <div class="modal-backdrop" (click)="close.emit()">
+      <wa-card class="edit-modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>Edit Quote</h2>
+          <wa-button variant="text" size="small" (click)="close.emit()">
+            <wa-icon name="xmark"></wa-icon>
+          </wa-button>
+        </div>
+
         <form (ngSubmit)="submit()">
           <wa-input label="Source" [value]="form.source_name" (input)="form.source_name = $any($event).target.value" placeholder="Movie, TV show, comedian, etc." required>
             <wa-icon slot="prefix" name="film"></wa-icon>
@@ -29,7 +35,7 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
             <wa-input label="Speaker 3" [value]="form.speaker_3" (input)="form.speaker_3 = $any($event).target.value" placeholder="Third speaker"></wa-input>
           </div>
 
-          <wa-input label="Your Name" [value]="form.contributor" (input)="form.contributor = $any($event).target.value" placeholder="Who's adding this quote?">
+          <wa-input label="Contributor" [value]="form.contributor" (input)="form.contributor = $any($event).target.value" placeholder="Who added this quote?">
             <wa-icon slot="prefix" name="pencil"></wa-icon>
           </wa-input>
 
@@ -38,16 +44,20 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
           </wa-input>
 
           <div class="image-upload-section">
-            <label class="section-label">Quote Image (Optional)</label>
+            <label class="section-label">Quote Image</label>
             <div class="file-dropzone" [class.has-file]="previewUrl()" (click)="fileInput.click()">
               <input #fileInput type="file" accept="image/jpeg,image/png,image/gif,image/webp" (change)="onFileSelected($event)" style="display: none;" />
-              
+
               @if (previewUrl()) {
                 <div class="preview-wrapper" (click)="$event.stopPropagation()">
-                  <img [src]="previewUrl()" [alt]="form.source_name || 'Selected quote preview'" class="preview-thumb" />
+                  <img [src]="previewUrl()" [alt]="form.source_name || 'Quote preview'" class="preview-thumb" />
                   <div class="preview-details">
-                    <span class="file-name">{{ selectedFile?.name }}</span>
-                    <span class="file-size">{{ getFormattedFileSize() }}</span>
+                    @if (selectedFile) {
+                      <span class="file-name">{{ selectedFile.name }}</span>
+                      <span class="file-size">{{ getFormattedFileSize() }}</span>
+                    } @else {
+                      <span class="file-name">Current image</span>
+                    }
                     <wa-button type="button" variant="text" size="small" (click)="clearFile($event)" class="remove-btn">
                       <wa-icon slot="prefix" name="trash"></wa-icon>
                       Remove
@@ -58,7 +68,6 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
                 <div class="upload-placeholder">
                   <wa-icon name="image" class="upload-icon"></wa-icon>
                   <span>Click to choose an image (JPG, PNG, GIF, WEBP max 5MB)</span>
-                  <span class="default-hint">If no image is uploaded, the default thumbnail will be used.</span>
                 </div>
               }
             </div>
@@ -67,27 +76,57 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
           <wa-textarea label="Notes" [value]="form.notes" (input)="form.notes = $any($event).target.value" placeholder="Any additional context..." rows="2" resize="auto"></wa-textarea>
 
           @if (error()) { <wa-callout variant="danger">{{ error() }}</wa-callout> }
-          @if (success()) { <wa-callout variant="success">Quote added successfully!</wa-callout> }
 
           <div class="form-actions">
-            <wa-button type="button" variant="neutral" (click)="reset()">
-              <wa-icon slot="prefix" name="xmark"></wa-icon>
-              Clear
+            <wa-button type="button" variant="neutral" (click)="close.emit()">
+              Cancel
             </wa-button>
             <wa-button type="submit" variant="brand" [disabled]="submitting()" [loading]="submitting()">
-              <wa-icon slot="prefix" name="plus"></wa-icon>
-              {{ submitting() ? 'Adding...' : 'Add Quote' }}
+              <wa-icon slot="prefix" name="check"></wa-icon>
+              {{ submitting() ? 'Saving...' : 'Save Changes' }}
             </wa-button>
           </div>
         </form>
+
+        @if (showPasswordModal()) {
+          <app-password-modal (close)="showPasswordModal.set(false)" (authenticated)="onAuthenticated($event)" />
+        }
       </wa-card>
-      @if (showPasswordModal()) { <app-password-modal (close)="showPasswordModal.set(false)" (authenticated)="onAuthenticated($event)" /> }
     </div>
   `,
   styles: [`
-    .add-quote-container { padding: 20px 0; max-width: 700px; margin:auto;}
-    h2 { margin-bottom: 20px; }
-    wa-card { display: block; }
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .edit-modal {
+      width: 100%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--wa-color-neutral-200);
+
+      h2 { margin: 0; }
+    }
+
     wa-input, wa-textarea { display: block; margin-bottom: 16px; }
     .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 16px; wa-input { margin-bottom: 0; } }
     wa-callout { margin-bottom: 16px; }
@@ -98,7 +137,6 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
       .section-label {
         display: block;
         font-weight: 500;
-        color: var(--color-dark-brown);
         margin-bottom: 6px;
         font-size: 0.95rem;
       }
@@ -106,23 +144,19 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
 
     .file-dropzone {
       border: 2px dashed var(--wa-color-neutral-300);
-      border-radius: var(--radius-sm, 6px);
+      border-radius: 6px;
       padding: 16px;
       text-align: center;
-      background: var(--color-light-bg, #fdfaf6);
       cursor: pointer;
       transition: border-color 0.2s, background-color 0.2s;
 
       &:hover {
-        border-color: var(--color-brown, #75b058);
-        background: #f9f5ee;
+        border-color: var(--wa-color-brand-600);
       }
 
       &.has-file {
         cursor: default;
         border-style: solid;
-        border-color: var(--wa-color-neutral-300);
-        background: #fff;
       }
     }
 
@@ -131,18 +165,10 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      color: var(--color-text-light);
+      color: var(--wa-color-neutral-600);
       font-size: 0.9rem;
 
-      .upload-icon {
-        font-size: 1.8rem;
-        color: var(--color-brown);
-      }
-
-      .default-hint {
-        font-size: 0.8rem;
-        opacity: 0.75;
-      }
+      .upload-icon { font-size: 1.8rem; }
     }
 
     .preview-wrapper {
@@ -177,20 +203,22 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
 
       .file-size {
         font-size: 0.8rem;
-        color: var(--color-text-light);
+        color: var(--wa-color-neutral-600);
       }
 
       .remove-btn {
         align-self: flex-start;
         margin-top: 4px;
-        --wa-color-neutral-600: var(--wa-color-danger-600);
       }
     }
   `]
 })
-export class AddQuoteComponent {
-  @Output() quoteAdded = new EventEmitter<void>();
+export class EditQuoteModalComponent implements OnInit {
+  @Input() quote!: Quote;
+  @Output() close = new EventEmitter<void>();
+  @Output() saved = new EventEmitter<void>();
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
+
   private quoteService = inject(QuoteService);
   private authService = inject(AuthService);
 
@@ -198,10 +226,27 @@ export class AddQuoteComponent {
   tagsInput = '';
   selectedFile: File | null = null;
   previewUrl = signal<string | null>(null);
+  removeImage = false;
   submitting = signal(false);
   error = signal('');
-  success = signal(false);
   showPasswordModal = signal(false);
+
+  ngOnInit() {
+    this.form = {
+      source_name: this.quote.source_name || '',
+      quote_text: this.quote.quote_text || '',
+      speaker_1: this.quote.speaker_1 || '',
+      speaker_2: this.quote.speaker_2 || '',
+      speaker_3: this.quote.speaker_3 || '',
+      contributor: this.quote.contributor || '',
+      notes: this.quote.notes || ''
+    };
+    this.tagsInput = (this.quote.tags || []).join(', ');
+
+    if (this.quote.image_url) {
+      this.previewUrl.set(this.quoteService.getImageUrl(this.quote));
+    }
+  }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -212,6 +257,7 @@ export class AddQuoteComponent {
         return;
       }
       this.selectedFile = file;
+      this.removeImage = false;
       this.error.set('');
 
       const reader = new FileReader();
@@ -226,6 +272,7 @@ export class AddQuoteComponent {
     if (event) event.stopPropagation();
     this.selectedFile = null;
     this.previewUrl.set(null);
+    this.removeImage = true;
     if (this.fileInput?.nativeElement) {
       this.fileInput.nativeElement.value = '';
     }
@@ -240,17 +287,29 @@ export class AddQuoteComponent {
   }
 
   submit() {
-    if (!this.form.source_name.trim() || !this.form.quote_text.trim()) { this.error.set('Source and quote are required'); return; }
-    if (!this.authService.isAuthenticated()) { this.showPasswordModal.set(true); return; }
+    if (!this.form.source_name.trim() || !this.form.quote_text.trim()) {
+      this.error.set('Source and quote are required');
+      return;
+    }
+    if (!this.authService.isAuthenticated()) {
+      this.showPasswordModal.set(true);
+      return;
+    }
     this.doSubmit();
   }
 
-  onAuthenticated(password: string) { this.showPasswordModal.set(false); this.doSubmit(); }
+  onAuthenticated(password: string) {
+    this.showPasswordModal.set(false);
+    this.doSubmit();
+  }
 
   private doSubmit() {
     const password = this.authService.password();
     if (!password) return;
-    this.submitting.set(true); this.error.set(''); this.success.set(false);
+
+    this.submitting.set(true);
+    this.error.set('');
+
     const tags = this.tagsInput.split(',').map(t => t.trim().toLowerCase()).filter(t => t).slice(0, 8);
 
     let payload: Partial<any> | FormData;
@@ -259,25 +318,33 @@ export class AddQuoteComponent {
       const formData = new FormData();
       formData.append('source_name', this.form.source_name.trim());
       formData.append('quote_text', this.form.quote_text.trim());
-      if (this.form.speaker_1.trim()) formData.append('speaker_1', this.form.speaker_1.trim());
-      if (this.form.speaker_2.trim()) formData.append('speaker_2', this.form.speaker_2.trim());
-      if (this.form.speaker_3.trim()) formData.append('speaker_3', this.form.speaker_3.trim());
-      if (this.form.contributor.trim()) formData.append('contributor', this.form.contributor.trim());
-      if (this.form.notes.trim()) formData.append('notes', this.form.notes.trim());
+      formData.append('speaker_1', this.form.speaker_1.trim());
+      formData.append('speaker_2', this.form.speaker_2.trim());
+      formData.append('speaker_3', this.form.speaker_3.trim());
+      formData.append('contributor', this.form.contributor.trim());
+      formData.append('notes', this.form.notes.trim());
       formData.append('tags', JSON.stringify(tags));
       formData.append('image', this.selectedFile);
       payload = formData;
     } else {
-      payload = { ...this.form, tags };
+      payload = {
+        source_name: this.form.source_name.trim(),
+        quote_text: this.form.quote_text.trim(),
+        speaker_1: this.form.speaker_1.trim(),
+        speaker_2: this.form.speaker_2.trim(),
+        speaker_3: this.form.speaker_3.trim(),
+        contributor: this.form.contributor.trim(),
+        notes: this.form.notes.trim(),
+        tags,
+        ...(this.removeImage ? { image_url: null } : {})
+      };
     }
 
-    this.quoteService.addQuote(payload, password).subscribe({
+    this.quoteService.updateQuote(this.quote.id, payload, password).subscribe({
       next: () => {
-        this.success.set(true);
-        this.reset();
         this.submitting.set(false);
-        this.quoteAdded.emit();
-        setTimeout(() => this.success.set(false), 3000);
+        this.saved.emit();
+        this.close.emit();
       },
       error: (err) => {
         this.submitting.set(false);
@@ -286,17 +353,9 @@ export class AddQuoteComponent {
           this.error.set('Invalid password.');
           this.showPasswordModal.set(true);
         } else {
-          this.error.set(err.error?.error || 'Failed to add quote.');
+          this.error.set(err.error?.error || 'Failed to update quote.');
         }
       }
     });
   }
-
-  reset() {
-    this.form = { source_name: '', quote_text: '', speaker_1: '', speaker_2: '', speaker_3: '', contributor: '', notes: '' };
-    this.tagsInput = '';
-    this.clearFile();
-    this.error.set('');
-  }
 }
-

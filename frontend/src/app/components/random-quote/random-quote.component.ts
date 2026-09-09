@@ -1,13 +1,14 @@
-import { Component, inject, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit, inject, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuoteService, Quote } from '../../services/quote.service';
 import { AuthService } from '../../services/auth.service';
 import { PasswordModalComponent } from '../password-modal/password-modal.component';
+import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.component';
 
 @Component({
   selector: 'app-random-quote',
   standalone: true,
-  imports: [CommonModule, PasswordModalComponent],
+  imports: [CommonModule, PasswordModalComponent, EditQuoteModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="random-quote-container">
@@ -26,6 +27,14 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
         </wa-card>
       } @else if (quote()) {
         <wa-card class="quote-card">
+          <div class="thumb-container">
+            <img
+              [src]="getImageUrl(quote())"
+              [alt]="quote()!.source_name || 'Movie thumbnail'"
+              (error)="onImageError($event)"
+              class="random-quote-thumb"
+            />
+          </div>
           <p class="quote-text">{{ quote()!.quote_text }}</p>
           <div class="quote-source">
             <span class="source">— {{ quote()!.source_name }}</span>
@@ -40,6 +49,10 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
             <wa-button variant="neutral" (click)="copyToClipboard()">
               <wa-icon slot="prefix" name="clipboard"></wa-icon>
               Copy
+            </wa-button>
+            <wa-button variant="neutral" (click)="editQuote()">
+              <wa-icon slot="prefix" name="pen-to-square"></wa-icon>
+              Edit
             </wa-button>
             <wa-button [variant]="quote()!.next_up ? 'brand' : 'neutral'" (click)="toggleNextUp()">
               <wa-icon slot="prefix" name="star"></wa-icon>
@@ -68,12 +81,24 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
       @if (showPasswordModal()) {
         <app-password-modal (close)="showPasswordModal.set(false)" (authenticated)="onAuthenticated($event)" />
       }
+      @if (editingQuote()) {
+        <app-edit-quote-modal [quote]="editingQuote()!" (close)="editingQuote.set(null)" (saved)="onQuoteSaved()" />
+      }
     </div>
   `,
   styles: [`
     .random-quote-container { padding: 20px 0; }
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
     .quote-card { text-align: center; padding: 40px 32px; }
+    .thumb-container { margin-bottom: 20px; display: flex; justify-content: center; }
+    .random-quote-thumb {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: var(--radius-md, 10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--wa-color-neutral-200);
+    }
     .quote-text { font-size: 1.4rem; max-width: 700px; margin: 0 auto 20px; font-style: italic; &::before { content: '"'; } &::after { content: '"'; } }
     .quote-source { margin-bottom: 16px; .source { font-weight: 500; color: var(--color-brown); } .speaker { color: var(--color-text-light); margin-left: 6px; } }
     .tags { margin-bottom: 24px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
@@ -85,7 +110,7 @@ import { PasswordModalComponent } from '../password-modal/password-modal.compone
     wa-card { display: block; }
   `]
 })
-export class RandomQuoteComponent {
+export class RandomQuoteComponent implements OnInit {
   private quoteService = inject(QuoteService);
   private authService = inject(AuthService);
 
@@ -94,7 +119,23 @@ export class RandomQuoteComponent {
   error = signal('');
   copied = signal(false);
   showPasswordModal = signal(false);
+  editingQuote = signal<Quote | null>(null);
   pendingAction = signal<'used' | 'nextup' | null>(null);
+
+  ngOnInit() {
+    this.getRandomQuote();
+  }
+
+  getImageUrl(quote?: Quote | null): string {
+    return this.quoteService.getImageUrl(quote);
+  }
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (target && !target.src.endsWith('/images/thumbs/default.jpg')) {
+      target.src = '/images/thumbs/default.jpg';
+    }
+  }
 
   getRandomQuote() {
     this.loading.set(true);
@@ -122,6 +163,23 @@ export class RandomQuoteComponent {
   toggleNextUp() {
     if (!this.authService.isAuthenticated()) { this.pendingAction.set('nextup'); this.showPasswordModal.set(true); return; }
     this.doToggleNextUp();
+  }
+
+  editQuote() {
+    const q = this.quote();
+    if (q) this.editingQuote.set(q);
+  }
+
+  onQuoteSaved() {
+    const q = this.quote();
+    if (q) {
+      this.quoteService.getQuotes({ unused: false }).subscribe({
+        next: (quotes) => {
+          const updated = quotes.find(quote => quote.id === q.id);
+          if (updated) this.quote.set(updated);
+        }
+      });
+    }
   }
 
   onAuthenticated(password: string) {

@@ -66,8 +66,8 @@ const seed = async () => {
 
     for (const item of seedData) {
       await client.query(
-        `INSERT INTO quotes (source_name, quote_text, speaker_1, tags, used_at, contributor)
-         VALUES ($1, $2, $3, $4, $5, $6)
+        `INSERT INTO quotes (source_name, quote_text, speaker_1, tags, used_at, contributor, image_url)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)
          ON CONFLICT DO NOTHING`,
         [
           item.source,
@@ -75,7 +75,8 @@ const seed = async () => {
           item.speaker || null,
           item.tags || [],
           item.used ? new Date() : null,
-          'Initial Seed'
+          'Initial Seed',
+          item.image_url || item.image || null
         ]
       );
     }

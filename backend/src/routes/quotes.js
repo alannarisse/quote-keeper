@@ -1,7 +1,53 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const pool = require('../db/pool');
 
 const router = express.Router();
+
+const uploadsDir = path.join(__dirname, '../../uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname).toLowerCase();
+    const safeBaseName = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
+    cb(null, `${safeBaseName}-${uniqueSuffix}${ext}`);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only image files (JPG, PNG, GIF, WEBP) are allowed'), false);
+  }
+};
+
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+});
+
+const handleUpload = (req, res, next) => {
+  upload.single('image')(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ error: `Upload error: ${err.message}` });
+    } else if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    next();
+  });
+};
 
 const requirePassword = (req, res, next) => {
   const password = req.headers['x-app-password'];
@@ -121,8 +167,16 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST /api/quotes - Add new quote (requires password)
-router.post('/', requirePassword, async (req, res) => {
+// POST /api/quotes/upload - Standalone image upload (requires password)
+router.post('/upload', requirePassword, handleUpload, (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No image file provided' });
+  }
+  res.json({ imageUrl: `/uploads/${req.file.filename}` });
+});
+
+// POST /api/quotes - Add new quote (requires password, supports multipart or json)
+router.post('/', requirePassword, handleUpload, async (req, res) => {
   try {
     const {
       source_name,
@@ -131,9 +185,25 @@ router.post('/', requirePassword, async (req, res) => {
       speaker_2,
       speaker_3,
       notes,
-      contributor,
-      tags = []
+      contributor
     } = req.body;
+
+    let { tags = [] } = req.body;
+    if (typeof tags === 'string') {
+      try {
+        tags = JSON.parse(tags);
+      } catch {
+        tags = tags.split(',').map(t => t.trim()).filter(Boolean);
+      }
+    }
+    if (!Array.isArray(tags)) {
+      tags = [];
+    }
+
+    let image_url = req.body.image_url || null;
+    if (req.file) {
+      image_url = `/uploads/${req.file.filename}`;
+    }
 
     if (!source_name || !quote_text) {
       return res.status(400).json({ error: 'source_name and quote_text are required' });
@@ -144,10 +214,10 @@ router.post('/', requirePassword, async (req, res) => {
     }
 
     const result = await pool.query(
-      `INSERT INTO quotes (source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `INSERT INTO quotes (source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags, image_url)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
        RETURNING *`,
-      [source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags]
+      [source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags, image_url]
     );
 
     res.status(201).json(result.rows[0]);
@@ -157,17 +227,30 @@ router.post('/', requirePassword, async (req, res) => {
   }
 });
 
-// PATCH /api/quotes/:id - Update quote (requires password)
-router.patch('/:id', requirePassword, async (req, res) => {
+// PATCH /api/quotes/:id - Update quote (requires password, supports multipart or json)
+router.patch('/:id', requirePassword, handleUpload, async (req, res) => {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const updates = { ...req.body };
 
-    if (updates.tags && updates.tags.length > 8) {
-      return res.status(400).json({ error: 'Maximum 8 tags allowed' });
+    if (req.file) {
+      updates.image_url = `/uploads/${req.file.filename}`;
     }
 
-    const allowedFields = ['source_name', 'quote_text', 'speaker_1', 'speaker_2', 'speaker_3', 'notes', 'contributor', 'tags'];
+    if (updates.tags) {
+      if (typeof updates.tags === 'string') {
+        try {
+          updates.tags = JSON.parse(updates.tags);
+        } catch {
+          updates.tags = updates.tags.split(',').map(t => t.trim()).filter(Boolean);
+        }
+      }
+      if (Array.isArray(updates.tags) && updates.tags.length > 8) {
+        return res.status(400).json({ error: 'Maximum 8 tags allowed' });
+      }
+    }
+
+    const allowedFields = ['source_name', 'quote_text', 'speaker_1', 'speaker_2', 'speaker_3', 'notes', 'contributor', 'tags', 'image_url'];
     const setClause = [];
     const values = [];
 

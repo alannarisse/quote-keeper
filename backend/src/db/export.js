@@ -11,7 +11,7 @@ const exportQuotes = async () => {
 
     const result = await client.query(`
       SELECT source_name, quote_text, speaker_1, speaker_2, speaker_3,
-             notes, contributor, tags, next_up, used_at IS NOT NULL as used
+             notes, contributor, tags, image_url, next_up, used_at IS NOT NULL as used
       FROM quotes
       ORDER BY source_name, id
     `);
@@ -27,6 +27,7 @@ const exportQuotes = async () => {
       if (row.notes) quote.notes = row.notes;
       if (row.contributor && row.contributor !== 'Initial Seed') quote.contributor = row.contributor;
       if (row.tags && row.tags.length > 0) quote.tags = row.tags;
+      if (row.image_url) quote.image_url = row.image_url;
       if (row.next_up) quote.next_up = true;
       if (row.used) quote.used = true;
       return quote;

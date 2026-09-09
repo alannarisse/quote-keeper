@@ -42,8 +42,8 @@ const reseed = async () => {
     console.log('Inserting quotes...');
     for (const item of quotes) {
       await client.query(
-        `INSERT INTO quotes (source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags, next_up, used_at)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+        `INSERT INTO quotes (source_name, quote_text, speaker_1, speaker_2, speaker_3, notes, contributor, tags, next_up, used_at, image_url)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
         [
           item.source,
           item.quote,
@@ -54,7 +54,8 @@ const reseed = async () => {
           item.contributor || 'Initial Seed',
           item.tags || [],
           item.next_up || false,
-          item.used ? new Date() : null
+          item.used ? new Date() : null,
+          item.image_url || item.image || null
         ]
       );
     }

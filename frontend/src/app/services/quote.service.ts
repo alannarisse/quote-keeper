@@ -13,6 +13,7 @@ export interface Quote {
   notes?: string;
   contributor?: string;
   tags: string[];
+  image_url?: string;
   next_up?: boolean;
   used_at?: string;
   created_at: string;
@@ -32,6 +33,23 @@ export interface QuoteFilters {
 export class QuoteService {
   private http = inject(HttpClient);
   private baseUrl = environment.apiUrl + '/quotes';
+
+  getImageUrl(quoteOrUrl?: Quote | null | string): string {
+    if (!quoteOrUrl) return '/images/thumbs/default.jpg';
+    const url = typeof quoteOrUrl === 'string' ? quoteOrUrl : quoteOrUrl.image_url;
+    if (!url) return '/images/thumbs/default.jpg';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+      return url;
+    }
+    if (url.startsWith('/uploads')) {
+      const apiBase = environment.apiUrl.replace(/\/api\/?$/, '');
+      return `${apiBase}${url}`;
+    }
+    if (url.startsWith('/')) {
+      return url;
+    }
+    return `/images/thumbs/${url}`;
+  }
 
   getQuotes(filters?: QuoteFilters): Observable<Quote[]> {
     let params = new HttpParams();
@@ -58,7 +76,7 @@ export class QuoteService {
     return this.http.get<string[]>(`${this.baseUrl}/sources`);
   }
 
-  addQuote(quote: Partial<Quote>, password: string): Observable<Quote> {
+  addQuote(quote: Partial<Quote> | FormData, password: string): Observable<Quote> {
     const headers = new HttpHeaders({ 'x-app-password': password });
     return this.http.post<Quote>(this.baseUrl, quote, { headers });
   }
@@ -81,5 +99,10 @@ export class QuoteService {
   deleteQuote(id: number, password: string): Observable<any> {
     const headers = new HttpHeaders({ 'x-app-password': password });
     return this.http.delete(`${this.baseUrl}/${id}`, { headers });
+  }
+
+  updateQuote(id: number, quote: Partial<Quote> | FormData, password: string): Observable<Quote> {
+    const headers = new HttpHeaders({ 'x-app-password': password });
+    return this.http.patch<Quote>(`${this.baseUrl}/${id}`, quote, { headers });
   }
 }
