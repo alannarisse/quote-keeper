@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-09T19:10:52.646Z",
-  "total_quotes": 58,
-  "active_quotes": 58,
+  "timestamp": "2026-10-16T08:42:32.640Z",
+  "total_quotes": 70,
+  "active_quotes": 70,
   "deleted_quotes": 0,
   "quotes": [
     {
@@ -16,8 +16,8 @@
       "image_url": "/uploads/surely-1788976138743-170209974.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.658Z",
-      "updated_at": "2026-09-10T00:48:58.744Z",
+      "created_at": "2026-09-02T00:10:07.658Z",
+      "updated_at": "2026-09-09T17:48:58.744Z",
       "deleted_at": null
     },
     {
@@ -32,8 +32,8 @@
       "image_url": "/uploads/surely-1788928688009-474918165.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.684Z",
-      "updated_at": "2026-09-09T11:38:08.012Z",
+      "created_at": "2026-09-02T00:10:07.684Z",
+      "updated_at": "2026-09-09T04:38:08.012Z",
       "deleted_at": null
     },
     {
@@ -50,8 +50,8 @@
       "image_url": "/uploads/beetlejuice-1788972694824-721428396.gif",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-09T06:37:49.424Z",
-      "updated_at": "2026-09-09T23:51:34.965Z",
+      "created_at": "2026-09-08T23:37:49.424Z",
+      "updated_at": "2026-09-09T16:51:34.965Z",
       "deleted_at": null
     },
     {
@@ -67,9 +67,9 @@
       "notes": null,
       "image_url": "/uploads/beetle-lyd-1788972552779-709230912.jpg",
       "next_up": false,
-      "used": false,
-      "created_at": "2026-09-09T06:39:35.595Z",
-      "updated_at": "2026-09-09T23:49:12.781Z",
+      "used": true,
+      "created_at": "2026-09-08T23:39:35.595Z",
+      "updated_at": "2026-09-17T16:01:13.611Z",
       "deleted_at": null
     },
     {
@@ -87,8 +87,8 @@
       "image_url": "/uploads/twodollars-1788972618285-587289671.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.422Z",
-      "updated_at": "2026-09-09T23:50:18.286Z",
+      "created_at": "2026-09-02T00:10:09.422Z",
+      "updated_at": "2026-09-09T16:50:18.286Z",
       "deleted_at": null
     },
     {
@@ -106,8 +106,8 @@
       "image_url": "/uploads/betteroffdeadraisins-1788972596069-960510305.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.446Z",
-      "updated_at": "2026-09-09T23:49:56.070Z",
+      "created_at": "2026-09-02T00:10:09.446Z",
+      "updated_at": "2026-09-09T16:49:56.070Z",
       "deleted_at": null
     },
     {
@@ -126,8 +126,8 @@
       "image_url": "/uploads/betteroffdead-1788972708482-860057867.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.475Z",
-      "updated_at": "2026-09-09T23:51:48.482Z",
+      "created_at": "2026-09-02T00:10:09.475Z",
+      "updated_at": "2026-09-09T16:51:48.482Z",
       "deleted_at": null
     },
     {
@@ -145,8 +145,8 @@
       "image_url": "/uploads/buckaroo-1788976172295-89149472.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.361Z",
-      "updated_at": "2026-09-10T00:49:32.299Z",
+      "created_at": "2026-09-02T00:10:08.361Z",
+      "updated_at": "2026-09-09T17:49:32.299Z",
       "deleted_at": null
     },
     {
@@ -164,8 +164,8 @@
       "image_url": "/uploads/banzai-history-1788976308640-928327538.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.385Z",
-      "updated_at": "2026-09-10T00:51:48.642Z",
+      "created_at": "2026-09-02T00:10:08.385Z",
+      "updated_at": "2026-09-09T17:51:48.642Z",
       "deleted_at": null
     },
     {
@@ -180,8 +180,8 @@
       "image_url": "/uploads/daredevil-1788976126568-766990920.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.685Z",
-      "updated_at": "2026-09-10T00:48:46.685Z",
+      "created_at": "2026-09-02T00:10:08.685Z",
+      "updated_at": "2026-09-09T17:48:46.685Z",
       "deleted_at": null
     },
     {
@@ -196,8 +196,8 @@
       "image_url": "/uploads/drwho-1788972528430-179673268.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-04T22:43:12.721Z",
-      "updated_at": "2026-09-09T23:48:48.456Z",
+      "created_at": "2026-09-04T15:43:12.721Z",
+      "updated_at": "2026-09-09T16:48:48.456Z",
       "deleted_at": null
     },
     {
@@ -215,8 +215,8 @@
       "image_url": "/uploads/dune2-1788979282441-27104122.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.130Z",
-      "updated_at": "2026-09-10T01:41:22.442Z",
+      "created_at": "2026-09-02T00:10:09.130Z",
+      "updated_at": "2026-09-09T18:41:22.442Z",
       "deleted_at": null
     },
     {
@@ -234,8 +234,8 @@
       "image_url": "/uploads/dune-1788978089445-581964067.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.153Z",
-      "updated_at": "2026-09-10T01:21:29.447Z",
+      "created_at": "2026-09-02T00:10:09.153Z",
+      "updated_at": "2026-09-09T18:21:29.447Z",
       "deleted_at": null
     },
     {
@@ -253,8 +253,8 @@
       "image_url": "/uploads/dune-sleeper-1788975943642-211344015.gif",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.175Z",
-      "updated_at": "2026-09-10T00:45:43.894Z",
+      "created_at": "2026-09-02T00:10:09.175Z",
+      "updated_at": "2026-09-09T17:45:43.894Z",
       "deleted_at": null
     },
     {
@@ -272,8 +272,8 @@
       "image_url": "/uploads/duneherbert-1788975956423-541488757.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.198Z",
-      "updated_at": "2026-09-10T00:45:56.431Z",
+      "created_at": "2026-09-02T00:10:09.198Z",
+      "updated_at": "2026-09-09T17:45:56.431Z",
       "deleted_at": null
     },
     {
@@ -290,8 +290,8 @@
       "image_url": "/uploads/dunementat-1788972772065-375016215.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.221Z",
-      "updated_at": "2026-09-09T23:52:52.066Z",
+      "created_at": "2026-09-02T00:10:09.221Z",
+      "updated_at": "2026-09-09T16:52:52.066Z",
       "deleted_at": null
     },
     {
@@ -308,8 +308,8 @@
       "image_url": "/uploads/eeaao-1788975917415-336708729.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.244Z",
-      "updated_at": "2026-09-10T00:45:17.504Z",
+      "created_at": "2026-09-02T00:10:09.244Z",
+      "updated_at": "2026-09-09T17:45:17.504Z",
       "deleted_at": null
     },
     {
@@ -327,8 +327,8 @@
       "image_url": "/uploads/eeaao-1788980225341-961592683.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.271Z",
-      "updated_at": "2026-09-10T01:57:05.377Z",
+      "created_at": "2026-09-02T00:10:09.271Z",
+      "updated_at": "2026-09-09T18:57:05.377Z",
       "deleted_at": null
     },
     {
@@ -346,8 +346,8 @@
       "image_url": null,
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.834Z",
-      "updated_at": "2026-09-02T07:10:07.834Z",
+      "created_at": "2026-09-02T00:10:07.834Z",
+      "updated_at": "2026-09-02T00:10:07.834Z",
       "deleted_at": null
     },
     {
@@ -365,8 +365,8 @@
       "image_url": "/uploads/carlin-1788927940466-295543984.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.856Z",
-      "updated_at": "2026-09-09T11:25:40.468Z",
+      "created_at": "2026-09-02T00:10:07.856Z",
+      "updated_at": "2026-09-09T04:25:40.468Z",
       "deleted_at": null
     },
     {
@@ -384,8 +384,8 @@
       "image_url": "/uploads/georgecarlin-1788927228902-988584370.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.878Z",
-      "updated_at": "2026-09-09T11:13:49.070Z",
+      "created_at": "2026-09-02T00:10:07.878Z",
+      "updated_at": "2026-09-09T04:13:49.070Z",
       "deleted_at": null
     },
     {
@@ -403,8 +403,8 @@
       "image_url": "/uploads/ghostdog-1788979244522-128602030.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.835Z",
-      "updated_at": "2026-09-10T01:40:44.531Z",
+      "created_at": "2026-09-02T00:10:08.835Z",
+      "updated_at": "2026-09-09T18:40:44.531Z",
       "deleted_at": null
     },
     {
@@ -421,8 +421,8 @@
       "image_url": "/uploads/samurai-1788979229279-624337087.png",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.870Z",
-      "updated_at": "2026-09-10T01:40:29.625Z",
+      "created_at": "2026-09-02T00:10:08.870Z",
+      "updated_at": "2026-09-09T18:40:29.625Z",
       "deleted_at": null
     },
     {
@@ -439,8 +439,8 @@
       "image_url": "/uploads/IMG_2551-1788973319411-519240442.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-09T12:30:18.812Z",
-      "updated_at": "2026-09-10T00:01:59.447Z",
+      "created_at": "2026-09-09T05:30:18.812Z",
+      "updated_at": "2026-09-09T17:01:59.447Z",
       "deleted_at": null
     },
     {
@@ -455,8 +455,8 @@
       "image_url": "/uploads/groundhogday2-1788975881409-466709579.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.299Z",
-      "updated_at": "2026-09-10T00:44:41.447Z",
+      "created_at": "2026-09-02T00:10:09.299Z",
+      "updated_at": "2026-09-09T17:44:41.447Z",
       "deleted_at": null
     },
     {
@@ -471,8 +471,44 @@
       "image_url": "/uploads/groundhog-day-one-1788980245617-676581827.jpg",
       "next_up": false,
       "used": true,
-      "created_at": "2026-09-02T07:10:09.321Z",
-      "updated_at": "2026-09-10T01:57:25.619Z",
+      "created_at": "2026-09-02T00:10:09.321Z",
+      "updated_at": "2026-09-09T18:57:25.619Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Hamilton",
+      "quote": "Talk less. Smile more. Don't let them know what you're against or what you're for.",
+      "speaker_1": "Aaron Burr",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "musical"
+      ],
+      "notes": null,
+      "image_url": "/uploads/hamiltonaaronburr-1788983434534-908538549.webp",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T19:50:34.668Z",
+      "updated_at": "2026-09-09T19:50:34.668Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Hamilton",
+      "quote": "Pride is not the word I’m looking for; there is so much more inside me now.",
+      "speaker_1": "Alexander Hamilton",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": null,
+      "tags": [
+        "musical"
+      ],
+      "notes": null,
+      "image_url": "/uploads/hamilton-1788986026441-81862396.jpeg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T20:33:46.610Z",
+      "updated_at": "2026-09-09T20:33:46.610Z",
       "deleted_at": null
     },
     {
@@ -487,8 +523,60 @@
       "image_url": "/uploads/bogart-1788975815817-416040330.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-09T12:35:00.153Z",
-      "updated_at": "2026-09-10T00:43:35.848Z",
+      "created_at": "2026-09-09T05:35:00.153Z",
+      "updated_at": "2026-09-09T17:43:35.848Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Inside Out",
+      "quote": "Crying helps me slow down and obsess over the weight of life's problems",
+      "speaker_1": "Sadness",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "animation"
+      ],
+      "notes": null,
+      "image_url": "/uploads/sadness-1788985759599-15533016.webp",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T20:29:19.659Z",
+      "updated_at": "2026-09-09T20:29:19.659Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Inside Out",
+      "quote": "Congratulations San Francisco, you've ruined pizza! First the Hawaiians, and now YOU!",
+      "speaker_1": "Anger",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": null,
+      "tags": [
+        "animation"
+      ],
+      "notes": null,
+      "image_url": "/uploads/insideout-anger-1788985825010-319591179.jpeg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T20:30:25.060Z",
+      "updated_at": "2026-09-09T20:30:25.060Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Inside Out",
+      "quote": "She's so big now. She won't fit in my rocket. How're we gonna get to the moon?",
+      "speaker_1": "Bing Bong",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": null,
+      "tags": [],
+      "notes": null,
+      "image_url": "/uploads/bingbong-1788985896331-788142635.webp",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T20:31:36.426Z",
+      "updated_at": "2026-09-09T20:31:36.426Z",
       "deleted_at": null
     },
     {
@@ -503,8 +591,8 @@
       "image_url": "/uploads/quint-1788980292316-449430246.webp",
       "next_up": false,
       "used": true,
-      "created_at": "2026-09-02T07:10:09.033Z",
-      "updated_at": "2026-09-10T01:58:12.317Z",
+      "created_at": "2026-09-02T00:10:09.033Z",
+      "updated_at": "2026-09-09T18:58:12.317Z",
       "deleted_at": null
     },
     {
@@ -519,8 +607,8 @@
       "image_url": "/uploads/jaws-dreyfuss-1788978076939-483464606.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.055Z",
-      "updated_at": "2026-09-10T01:21:16.941Z",
+      "created_at": "2026-09-02T00:10:09.055Z",
+      "updated_at": "2026-09-09T18:21:16.941Z",
       "deleted_at": null
     },
     {
@@ -535,8 +623,8 @@
       "image_url": "/uploads/jaws-1788975977209-84829052.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.083Z",
-      "updated_at": "2026-09-10T00:46:17.213Z",
+      "created_at": "2026-09-02T00:10:09.083Z",
+      "updated_at": "2026-09-09T17:46:17.213Z",
       "deleted_at": null
     },
     {
@@ -551,8 +639,42 @@
       "image_url": "/uploads/jaws2-1788975991379-440956466.jpeg",
       "next_up": false,
       "used": true,
-      "created_at": "2026-09-02T07:10:09.107Z",
-      "updated_at": "2026-09-10T00:46:31.380Z",
+      "created_at": "2026-09-02T00:10:09.107Z",
+      "updated_at": "2026-09-09T17:46:31.380Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Knives Out",
+      "quote": "I suspect foul play. I have eliminated no suspects.",
+      "speaker_1": "Benoit Blanc",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "murder mystery"
+      ],
+      "notes": null,
+      "image_url": "/uploads/knivesout-1788986286825-65791464.jpeg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T20:38:06.900Z",
+      "updated_at": "2026-09-09T20:38:06.900Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Knives Out",
+      "quote": "Et voila, my method. I observe the facts without biases of the head or heart. I determine the arc's path, stroll leisurely to its terminus and the truth falls at my feet.",
+      "speaker_1": "Benoit Blanc",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": null,
+      "tags": [],
+      "notes": null,
+      "image_url": "/uploads/benoit-blanc-1788986372327-393484518.jpeg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T20:39:32.379Z",
+      "updated_at": "2026-09-09T20:39:32.379Z",
       "deleted_at": null
     },
     {
@@ -570,8 +692,8 @@
       "image_url": null,
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.409Z",
-      "updated_at": "2026-09-10T00:49:11.811Z",
+      "created_at": "2026-09-02T00:10:08.409Z",
+      "updated_at": "2026-09-09T17:49:11.811Z",
       "deleted_at": null
     },
     {
@@ -589,8 +711,8 @@
       "image_url": "/uploads/letterkennynewf-1788979195072-732208504.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.662Z",
-      "updated_at": "2026-09-10T01:39:55.158Z",
+      "created_at": "2026-09-02T00:10:08.662Z",
+      "updated_at": "2026-09-09T18:39:55.158Z",
       "deleted_at": null
     },
     {
@@ -605,8 +727,8 @@
       "image_url": "/uploads/gandalph-1788976069329-869691287.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.732Z",
-      "updated_at": "2026-09-10T00:47:49.332Z",
+      "created_at": "2026-09-02T00:10:07.732Z",
+      "updated_at": "2026-09-09T17:47:49.332Z",
       "deleted_at": null
     },
     {
@@ -621,8 +743,8 @@
       "image_url": "/uploads/gandalph-1788927900294-464465154.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.754Z",
-      "updated_at": "2026-09-09T11:25:00.297Z",
+      "created_at": "2026-09-02T00:10:07.754Z",
+      "updated_at": "2026-09-09T04:25:00.297Z",
       "deleted_at": null
     },
     {
@@ -637,8 +759,8 @@
       "image_url": null,
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.274Z",
-      "updated_at": "2026-09-02T07:10:08.274Z",
+      "created_at": "2026-09-02T00:10:08.274Z",
+      "updated_at": "2026-09-02T00:10:08.274Z",
       "deleted_at": null
     },
     {
@@ -653,8 +775,8 @@
       "image_url": "/uploads/skeletor-1788917127044-915941834.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.302Z",
-      "updated_at": "2026-09-09T01:25:27.046Z",
+      "created_at": "2026-09-02T00:10:08.302Z",
+      "updated_at": "2026-09-08T18:25:27.046Z",
       "deleted_at": null
     },
     {
@@ -669,8 +791,44 @@
       "image_url": "/uploads/heman-1788927997297-705822890.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.325Z",
-      "updated_at": "2026-09-09T11:26:37.299Z",
+      "created_at": "2026-09-02T00:10:08.325Z",
+      "updated_at": "2026-09-09T04:26:37.299Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Mean Girls",
+      "quote": "That's why her hair is so big. It's full of secrets.",
+      "speaker_1": "Damian",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "comedy"
+      ],
+      "notes": null,
+      "image_url": "/uploads/meangirls-damian-1788983831050-172956020.jpeg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T19:57:11.129Z",
+      "updated_at": "2026-09-09T19:57:11.129Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Mean Girls",
+      "quote": "The limit does not exist!",
+      "speaker_1": "Cady Heron",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "comedy"
+      ],
+      "notes": null,
+      "image_url": "/uploads/meangirls-cady_smiling-1788983903196-302286927.webp",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-09T19:58:23.303Z",
+      "updated_at": "2026-09-09T19:58:23.303Z",
       "deleted_at": null
     },
     {
@@ -688,8 +846,8 @@
       "image_url": null,
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.937Z",
-      "updated_at": "2026-09-02T07:10:07.937Z",
+      "created_at": "2026-09-02T00:10:07.937Z",
+      "updated_at": "2026-09-02T00:10:07.937Z",
       "deleted_at": null
     },
     {
@@ -707,8 +865,8 @@
       "image_url": "/uploads/what-is-the-air-speed-velocity-of-an-unladen-swallow-v0-ejZhdmQydHppcWVmMUZn0HJvDwnV5qmMd1HmOS4qyCyZtAnUwsitjRCdDD3G-1788929377297-505088511.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.191Z",
-      "updated_at": "2026-09-09T11:49:37.300Z",
+      "created_at": "2026-09-02T00:10:08.191Z",
+      "updated_at": "2026-09-09T04:49:37.300Z",
       "deleted_at": null
     },
     {
@@ -726,8 +884,8 @@
       "image_url": "/uploads/mountyflesh-1788926983310-427863917.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.223Z",
-      "updated_at": "2026-09-09T11:09:43.313Z",
+      "created_at": "2026-09-02T00:10:08.223Z",
+      "updated_at": "2026-09-09T04:09:43.313Z",
       "deleted_at": null
     },
     {
@@ -745,8 +903,8 @@
       "image_url": "/uploads/Screenshot_2026-09-08_at_9_37_38___PM-1788928669238-887524810.png",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.252Z",
-      "updated_at": "2026-09-09T11:37:49.481Z",
+      "created_at": "2026-09-02T00:10:08.252Z",
+      "updated_at": "2026-09-09T04:37:49.481Z",
       "deleted_at": null
     },
     {
@@ -761,8 +919,8 @@
       "image_url": "/uploads/vinny-1788977919908-509468022.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.710Z",
-      "updated_at": "2026-09-10T01:18:39.934Z",
+      "created_at": "2026-09-02T00:10:07.710Z",
+      "updated_at": "2026-09-09T18:18:39.934Z",
       "deleted_at": null
     },
     {
@@ -777,8 +935,8 @@
       "image_url": "/uploads/milton2-1788976056694-369168619.png",
       "next_up": false,
       "used": true,
-      "created_at": "2026-09-02T07:10:08.895Z",
-      "updated_at": "2026-09-10T00:47:36.727Z",
+      "created_at": "2026-09-02T00:10:08.895Z",
+      "updated_at": "2026-09-09T17:47:36.727Z",
       "deleted_at": null
     },
     {
@@ -796,8 +954,8 @@
       "image_url": "/uploads/case-of-the-mondays-careers-1788976040239-788803218.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.921Z",
-      "updated_at": "2026-09-10T00:47:20.241Z",
+      "created_at": "2026-09-02T00:10:08.921Z",
+      "updated_at": "2026-09-09T17:47:20.241Z",
       "deleted_at": null
     },
     {
@@ -815,8 +973,8 @@
       "image_url": "/uploads/milton-1788976013856-261444230.jpg",
       "next_up": false,
       "used": true,
-      "created_at": "2026-09-02T07:10:08.952Z",
-      "updated_at": "2026-09-10T00:46:53.858Z",
+      "created_at": "2026-09-02T00:10:08.952Z",
+      "updated_at": "2026-09-09T17:46:53.858Z",
       "deleted_at": null
     },
     {
@@ -831,8 +989,45 @@
       "image_url": null,
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.909Z",
-      "updated_at": "2026-09-02T07:10:07.909Z",
+      "created_at": "2026-09-02T00:10:07.909Z",
+      "updated_at": "2026-09-02T00:10:07.909Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Powerpuff Girls",
+      "quote": "Liver and onions? I hate liver and onions! This stuff isn't even fit for a dog to eat!",
+      "speaker_1": "Buttercup",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "cartoon",
+        "show"
+      ],
+      "notes": null,
+      "image_url": "/uploads/powerpuff-lando-1789487298792-994767058.jpeg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-15T15:48:18.855Z",
+      "updated_at": "2026-09-15T15:48:18.855Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Powerpuff Girls",
+      "quote": "My Crayons Are Beautiful, Just Not Magic",
+      "speaker_1": "Bubbles",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "cartoon"
+      ],
+      "notes": null,
+      "image_url": "/uploads/Screenshot_2026-09-15_at_11_42_53___AM-1789497818450-340243547.png",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-15T18:43:38.711Z",
+      "updated_at": "2026-09-15T18:43:38.711Z",
       "deleted_at": null
     },
     {
@@ -849,8 +1044,8 @@
       "image_url": "/uploads/lambs-1788975805894-813799526.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-09T12:33:27.502Z",
-      "updated_at": "2026-09-10T00:43:25.898Z",
+      "created_at": "2026-09-09T05:33:27.502Z",
+      "updated_at": "2026-09-09T17:43:25.898Z",
       "deleted_at": null
     },
     {
@@ -865,8 +1060,8 @@
       "image_url": "/uploads/slapshot2-1788979416368-883297098.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.706Z",
-      "updated_at": "2026-09-10T01:43:36.373Z",
+      "created_at": "2026-09-02T00:10:08.706Z",
+      "updated_at": "2026-09-09T18:43:36.373Z",
       "deleted_at": null
     },
     {
@@ -881,8 +1076,8 @@
       "image_url": "/uploads/slapshot-1788976110402-315484547.webp",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.733Z",
-      "updated_at": "2026-09-10T00:48:30.403Z",
+      "created_at": "2026-09-02T00:10:08.733Z",
+      "updated_at": "2026-09-09T17:48:30.403Z",
       "deleted_at": null
     },
     {
@@ -897,8 +1092,8 @@
       "image_url": "/uploads/spiderman-dafoe-1788978240414-194187864.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.759Z",
-      "updated_at": "2026-09-10T01:24:00.437Z",
+      "created_at": "2026-09-02T00:10:08.759Z",
+      "updated_at": "2026-09-09T18:24:00.437Z",
       "deleted_at": null
     },
     {
@@ -913,8 +1108,8 @@
       "image_url": "/uploads/spiderman-1788976094815-746576100.jpg",
       "next_up": false,
       "used": true,
-      "created_at": "2026-09-02T07:10:08.785Z",
-      "updated_at": "2026-09-10T00:48:14.902Z",
+      "created_at": "2026-09-02T00:10:08.785Z",
+      "updated_at": "2026-09-09T17:48:14.902Z",
       "deleted_at": null
     },
     {
@@ -929,8 +1124,8 @@
       "image_url": "/uploads/spiderman-dafoe-1788979263844-999231488.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:08.809Z",
-      "updated_at": "2026-09-10T01:41:03.868Z",
+      "created_at": "2026-09-02T00:10:08.809Z",
+      "updated_at": "2026-09-09T18:41:03.868Z",
       "deleted_at": null
     },
     {
@@ -945,8 +1140,8 @@
       "image_url": "/uploads/colorpurple-1788976530764-910594949.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.812Z",
-      "updated_at": "2026-09-10T00:55:30.794Z",
+      "created_at": "2026-09-02T00:10:07.812Z",
+      "updated_at": "2026-09-09T17:55:30.794Z",
       "deleted_at": null
     },
     {
@@ -961,8 +1156,26 @@
       "image_url": "/uploads/cans-1788929532020-321194098.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:07.781Z",
-      "updated_at": "2026-09-09T11:52:12.071Z",
+      "created_at": "2026-09-02T00:10:07.781Z",
+      "updated_at": "2026-09-09T04:52:12.071Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Time Bandits",
+      "quote": "I am the Supreme Being, I'm not entirely dim",
+      "speaker_1": "Supreme Being",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "comedy"
+      ],
+      "notes": null,
+      "image_url": "/uploads/timebandits-supreme-1790024267305-892634931.jpg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-21T20:57:47.363Z",
+      "updated_at": "2026-09-21T20:57:47.363Z",
       "deleted_at": null
     },
     {
@@ -980,8 +1193,8 @@
       "image_url": "/uploads/zoolandernecktie-1788973172796-390207156.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.343Z",
-      "updated_at": "2026-09-09T23:59:32.798Z",
+      "created_at": "2026-09-02T00:10:09.343Z",
+      "updated_at": "2026-09-09T16:59:32.798Z",
       "deleted_at": null
     },
     {
@@ -998,8 +1211,8 @@
       "image_url": "/uploads/centerforants-1788972661444-166461740.jpeg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.370Z",
-      "updated_at": "2026-09-09T23:51:01.447Z",
+      "created_at": "2026-09-02T00:10:09.370Z",
+      "updated_at": "2026-09-09T16:51:01.447Z",
       "deleted_at": null
     },
     {
@@ -1016,8 +1229,8 @@
       "image_url": "/uploads/zoomoist-1788975865270-659383305.jpg",
       "next_up": false,
       "used": false,
-      "created_at": "2026-09-02T07:10:09.400Z",
-      "updated_at": "2026-09-10T00:44:25.316Z",
+      "created_at": "2026-09-02T00:10:09.400Z",
+      "updated_at": "2026-09-09T17:44:25.316Z",
       "deleted_at": null
     }
   ]
