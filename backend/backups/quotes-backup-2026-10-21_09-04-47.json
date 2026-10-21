@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-21T09:32:59.257Z",
-  "total_quotes": 69,
-  "active_quotes": 69,
+  "timestamp": "2026-10-21T09:04:47.415Z",
+  "total_quotes": 70,
+  "active_quotes": 70,
   "deleted_quotes": 0,
   "quotes": [
     {
@@ -1158,6 +1158,24 @@
       "used": false,
       "created_at": "2026-09-02T00:10:07.781Z",
       "updated_at": "2026-09-09T04:52:12.071Z",
+      "deleted_at": null
+    },
+    {
+      "source": "Time Bandits",
+      "quote": "I am the Supreme Being, I'm not entirely dim",
+      "speaker_1": "Supreme Being",
+      "speaker_2": null,
+      "speaker_3": null,
+      "contributor": "alanna",
+      "tags": [
+        "comedy"
+      ],
+      "notes": null,
+      "image_url": "/uploads/timebandits-supreme-1790024267305-892634931.jpg",
+      "next_up": false,
+      "used": false,
+      "created_at": "2026-09-21T20:57:47.363Z",
+      "updated_at": "2026-09-21T20:57:47.363Z",
       "deleted_at": null
     },
     {
