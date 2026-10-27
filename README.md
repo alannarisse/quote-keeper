@@ -117,6 +117,11 @@ Auth requires `x-app-password` header.
 - **One-Click Backup Download**: Visit `/api/quotes/backup/download` to download the current JSON backup directly.
 - **Automated GitHub Actions Backup**: A GitHub Actions workflow runs daily (`.github/workflows/db-backup.yml`) to automatically snapshot the database into `backend/backups/`. Add `DATABASE_URL` to your GitHub Repository Secrets to enable it.
 
+## Local backup
+`cd backend`
+`npm run db:backup`
+
+
 ## Deployment
 
 ### Railway (Backend + Database)
