@@ -16,7 +16,22 @@ export class AppComponent {
   private router = inject(Router);
   authService = inject(AuthService);
   showLoginModal = signal(false);
-  protected warningColor = signal('red');
+  dark = signal(localStorage.getItem('qk-theme') === 'dark');
+
+  constructor() {
+    this.applyTheme();
+  }
+
+  toggleTheme() {
+    this.dark.update(value => !value);
+    localStorage.setItem('qk-theme', this.dark() ? 'dark' : 'light');
+    this.applyTheme();
+  }
+
+  private applyTheme() {
+    document.documentElement.classList.toggle('wa-dark', this.dark());
+    document.documentElement.style.colorScheme = this.dark() ? 'dark' : 'light';
+  }
 
   isActive(path: string): boolean {
     if (path === '/') {

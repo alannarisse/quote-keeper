@@ -1,81 +1,15 @@
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
-}
 
-header {
-  box-shadow: var(--shadow-sm);
-  padding: 1rem .6rem;
-  margin-bottom: 20px;
-
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-
-}
-
-main {
-  padding-bottom: 40px;
-  min-width: 65%;
-  min-height: 70vh;
-  margin: auto;
-}
-
-footer {
-  color: var(--color-cream);
-  background: var(--color-dark-brown);
-  padding: 3rem;
-  width: 100%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  ul {
-    font-size: .8rem;
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 1.6rem;
-  }
-
-  a {
-    color: var(--color-cream);
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  main {
-    max-width: 95%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  header .container {
-    justify-content: center;
-    padding: 0;
-  }
-
-
-  h1 {
-    font-size: 32px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
-}
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+header { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--border); background: var(--header-bg); backdrop-filter: blur(8px); }
+header .container { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; padding-top: 1.25rem; padding-bottom: 1.25rem; }
+.brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+.brand img { transform: rotate(-6deg); }
+h1 { margin: 0; font-size: 1.5rem; letter-spacing: -.025em; }
+h1 span { color: var(--primary); }
+nav { margin-left: auto; }
+.nav-links { display: flex; flex-wrap: wrap; gap: .375rem; }
+.theme-toggle { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; color: var(--foreground); background: var(--muted); }
+main { flex: 1; padding-top: 2.5rem; padding-bottom: 3rem; min-width: 0; }
+footer { border-top: 1px solid var(--border); padding: 1.5rem; text-align: center; color: var(--muted-foreground); }
+footer h2 { font: 400 .875rem var(--font-sans); margin: 0; }
+@media (max-width: 700px) { nav { order: 3; width: 100%; margin: 0; } .theme-toggle { margin-left: auto; } .nav-links { gap: .25rem; } }
