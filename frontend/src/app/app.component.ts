@@ -42,6 +42,9 @@ export class AppComponent {
 
   logout() {
     this.authService.clearPassword();
+    if (this.isActive('/add')) {
+      void this.router.navigate(['/quotes']);
+    }
   }
 
   onAuthenticated(password: string) {

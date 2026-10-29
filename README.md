@@ -1,6 +1,8 @@
 # Quote Keeper
 
-A web app to store and manage quotes from movies, TV shows, comedians, and other sources. Built for a weekly release messages.
+A web app to store and manage quotes from movies, TV shows, comedians, and other sources. I originally built this while employed at Back Office for a weekly release messages that we liked to add quotes to, this is now a personal project (I hope they are still using it though).
+
+I created this in Angular with Webawesome as a way of getting more familiar with that combo. It has a node/express API connected to a PostgreSQL database, hosted on railway, and a frontend in Angular hosted on 
 
 ## Features
 

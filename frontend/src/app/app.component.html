@@ -15,12 +15,13 @@
             <wa-icon slot="prefix" name="list"></wa-icon>
             All Quotes
           </wa-button>
+          @if (authService.isAuthenticated()) {
           <wa-button [variant]="isActive('/add') ? 'brand' : 'neutral'" routerLink="/add" routerLinkActive="active"
             size="s">
             <wa-icon slot="prefix" name="plus"></wa-icon>
             Add Quote
           </wa-button>
-          @if (authService.isAuthenticated()) {
+
             <wa-button variant="neutral" size="s" (click)="logout()" title="Logout" aria-label="Logout">
               <wa-icon slot="prefix" name="right-from-bracket"></wa-icon>
               Logout

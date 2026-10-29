@@ -2,7 +2,7 @@
 .filters { margin-bottom: 2rem; }
 .now-showing { margin: 0 0 1rem; font-size: 1.25rem; }
 .chip-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
-.chip { border: 0; border-radius: 999px; padding: .5rem 1rem; font-weight: 600; background: var(--card); color: var(--muted-foreground); }
+.chip { border: 0; border-radius: 999px; padding: .5rem 1rem; font-weight: 600; font-size:0.7rem;background: var(--card); color: var(--muted-foreground); }
 .chip:hover { background: var(--muted); }
 .chip.active { background: var(--foreground); color: var(--background); }
 .tag-chip.active { background: var(--secondary); color: var(--secondary-foreground); }
