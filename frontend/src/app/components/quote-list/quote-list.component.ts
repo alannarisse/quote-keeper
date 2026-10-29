@@ -13,15 +13,22 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="quote-list-container">
-      <wa-card class="filters">
+      <section class="filters" aria-label="Filter quotes">
+        <h2 class="now-showing">Now showing</h2>
+        <div class="chip-row">
+          <button type="button" class="chip" [class.active]="!filters.tag" [attr.aria-pressed]="!filters.tag" (click)="filters.tag = ''; loadQuotes()">Everything</button>
+          @for (tag of tags(); track tag) {
+            <button type="button" class="chip tag-chip" [class.active]="filters.tag === tag" [attr.aria-pressed]="filters.tag === tag" (click)="filters.tag = filters.tag === tag ? '' : tag; loadQuotes()">#{{ tag }}</button>
+          }
+        </div>
         <div class="filter-row">
-          <wa-input placeholder="Search by source..." [value]="filters.source || ''" (input)="filters.source = $any($event).target.value; loadQuotes()">
+          <wa-input label="Search by source" placeholder="Search a title…" [value]="filters.source || ''" (input)="filters.source = $any($event).target.value; loadQuotes()">
             <wa-icon slot="prefix" name="magnifying-glass"></wa-icon>
           </wa-input>
-          <wa-input placeholder="Search by speaker..." [value]="filters.speaker || ''" (input)="filters.speaker = $any($event).target.value; loadQuotes()">
+          <wa-input label="Search by speaker" placeholder="Search a speaker…" [value]="filters.speaker || ''" (input)="filters.speaker = $any($event).target.value; loadQuotes()">
             <wa-icon slot="prefix" name="user"></wa-icon>
           </wa-input>
-          <wa-select placeholder="All tags" [value]="filters.tag || ''" (change)="filters.tag = $any($event).target.value; loadQuotes()">
+          <wa-select label="Filter by tag" placeholder="All tags" [value]="filters.tag || ''" (change)="filters.tag = $any($event).target.value; loadQuotes()">
             <wa-option value="">All tags</wa-option>
             @for (tag of tags(); track tag) { <wa-option [value]="tag">{{ tag }}</wa-option> }
           </wa-select>
@@ -30,7 +37,7 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
           <wa-checkbox [checked]="filters.unused || false" (change)="filters.unused = $any($event).target.checked; loadQuotes()">Show unused only</wa-checkbox>
           <div class="sort-controls">
             <span>Sort by:</span>
-            <wa-select [value]="filters.sort || 'created_at'" (change)="onSortChange($event)">
+            <wa-select aria-label="Sort quotes" [value]="filters.sort || 'created_at'" (change)="onSortChange($event)">
               <wa-option value="created_at">Date Added</wa-option>
               <wa-option value="source_name">Source</wa-option>
               <wa-option value="speaker_1">Speaker</wa-option>
@@ -44,7 +51,7 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
             </wa-button>
           </div>
         </div>
-      </wa-card>
+      </section>
 
       <div class="quote-count">
         <wa-badge variant="neutral">{{ quotes().length }}</wa-badge>
@@ -58,6 +65,9 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
         </div>
       } @else {
         <div class="quotes-grid">
+          @if (quotes().length === 0) {
+            <div class="empty"><h2>No quotes found.</h2><p>Roll the tape and try another search.</p></div>
+          }
           @for (quote of quotes(); track quote.id) {
             <wa-card class="quote-item" [class.used]="quote.used_at" [class.next-up]="quote.next_up">
               <div class="quote-layout">
@@ -66,7 +76,7 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
                   [src]="getImageUrl(quote)"
                   [alt]="quote.source_name || 'Movie thumbnail'"
                   (error)="onImageError($event)"
-                  class="quote-thumb-img"
+                  class="quote-thumb-img" loading="lazy"
                 />
                 </div>
                 <div class="quote-source">
@@ -75,7 +85,7 @@ import { EditQuoteModalComponent } from '../edit-quote-modal/edit-quote-modal.co
                   </div>
               </div>
               <div class="quote-body">
-                  <p class="quote-text">{{ quote.quote_text }}</p>
+                  <blockquote class="quote-text">{{ quote.quote_text }}</blockquote>
                   
                   @if (quote.tags.length > 0) {
                     <div class="tags">@for (tag of quote.tags; track tag) { <wa-tag size="xs">{{ tag }}</wa-tag> }</div>

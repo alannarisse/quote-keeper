@@ -1,13 +1,10 @@
 <div class="app">
   <header>
     <div class="container">
-      <h1>
-        <wa-icon name="quote-left" style="margin-right: 8px;"></wa-icon>
-        Quote Keeper
-      </h1>
-      <nav>
+      <a class="brand" routerLink="/quotes" aria-label="Quote Keeper — all quotes"><img src="assets/logo-ticket.png" alt="" width="40" height="40"><h1>Quote <span>Keeper</span></h1></a>
+      <nav aria-label="Main navigation">
 
-        <wa-button-group>
+        <div class="nav-links">
           <wa-button [variant]="isActive('/') ? 'brand' : 'neutral'" routerLink="/" routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}" size="s">
             <wa-icon slot="prefix" name="shuffle"></wa-icon>
@@ -34,8 +31,9 @@
               Login
             </wa-button>
           }
-        </wa-button-group>
+        </div>
       </nav>
+      <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="dark() ? 'Switch to light mode' : 'Switch to dark mode'"><wa-icon [name]="dark() ? 'sun' : 'moon'" aria-hidden="true"></wa-icon></button>
     </div>
   </header>
   <main class="container">

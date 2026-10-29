@@ -144,3 +144,12 @@ wa-card {
     }
 
 }
+.random-quote-container { max-width: 52rem; margin: 0 auto; padding: 0; }
+.quote-card { padding: 0; }
+.quote-card::part(body) { padding: 2rem; }
+.random-quote-thumb { width: 100%; height: auto; max-height: 22rem; aspect-ratio: 3 / 2; object-fit: cover; border-radius: .75rem; }
+.quote-text { font-family: var(--font-display); font-style: normal; font-size: clamp(1.25rem, 3vw, 1.875rem); }
+.quote-text::before, .quote-text::after { color: var(--primary); }
+.actions { border-top: 1px dashed var(--border); }
+.actions wa-button:first-child::part(base) { background: var(--gold); color: var(--gold-foreground); }
+@media (max-width: 639px) { .quote-card::part(body) { padding: 1.25rem; } }
